@@ -3,10 +3,6 @@
     margin: 0;
 }
 
-div.container {
-    background-color: rgb(255, 0, 0);
-}
-
-section {
+div.box {
     background-color: grey;
 }
