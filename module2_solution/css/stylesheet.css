@@ -1,19 +1,39 @@
-/* Base Style */
-* {
-    box-sizing: border-box;
-    margin: 0;
-}
-
 body {
-    font-size: 100%;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-div.box {
-    background-color: grey;
-    border: 1px solid black;
+.container {
+    width: 800px;
+    margin: 50px auto;
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.menu-sections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.section {
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.section p {
+    line-height: 1.5;
 }
