@@ -22,7 +22,7 @@ h1 {
     position: relative;
 }
 
-p.heading {
+h3.heading {
     margin: 0px;
     width: fit-content;
     height: fit-content;
