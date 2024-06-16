@@ -14,7 +14,7 @@ h1 {
 }
 
 .section.heading {
-    float: right;
+    float: top right;
     margin: 0px;
     border: 1px solid black;
 }
