@@ -33,15 +33,15 @@ h4 {
     border: 1px solid black;
 }
 
-#section1.heading {
+#section1 .heading {
     background-color: orange;
 }
 
-#section2.heading {
+#section2 .heading {
     background-color: aqua;
 }
 
-#section3.heading {
+#section3 .heading {
     background-color: white;
 }
 
