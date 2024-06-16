@@ -64,6 +64,7 @@ p.heading {
 /* Tablet devices */
 @media (min-width: 768px) and (max-width: 991px) {
     .menu-sections {
+        padding: 1%;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -80,7 +81,11 @@ p.heading {
 
 /* Mobile Devices */
 @media (max-width: 767px) {
+    .menu-sections {
+        padding: 1%;
+    }
+
     .section {
-        width: 100%;
+        width: 98%;
     }
 }
