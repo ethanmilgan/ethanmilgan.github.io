@@ -23,6 +23,6 @@ h1 {
     margin-bottom: 20px;
     padding: 20px;
     border: 1px solid black;
-    background: grey;
+    background-color: grey;
     position: relative;
 }
