@@ -28,7 +28,7 @@ h1 {
     }
 
     .section {
-        width: 30%;
+        width: 32%;
         margin-bottom: 20px;
         padding: 20px;
         border: 1px solid black;
@@ -46,7 +46,7 @@ h1 {
     }
 
     .section {
-        width: 45%;
+        width: 48%;
         margin-bottom: 20px;
         padding: 20px;
         border: 1px solid black;
@@ -65,5 +65,17 @@ h1 {
 
 /* Mobile Devices */
 @media (max-width: 767px) {
-    
+    .menu-sections {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .section {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid black;
+        background-color: grey;
+        position: relative;
+    }
 }
