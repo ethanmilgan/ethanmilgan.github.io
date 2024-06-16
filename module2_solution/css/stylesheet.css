@@ -16,7 +16,6 @@ h1 {
 .section.heading {
     float: right;
     margin: 0px;
-    width: fit-content;
     border: 1px solid black;
 }
 
@@ -30,6 +29,10 @@ h1 {
 
 #section3.heading {
     background-color: white;
+}
+
+.section p {
+    clear: right;
 }
 
 /* Desktop devices */
