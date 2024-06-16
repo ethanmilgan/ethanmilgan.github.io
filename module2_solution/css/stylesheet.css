@@ -13,10 +13,23 @@ h1 {
     text-align: center;
 }
 
-.section h4 {
+.section.heading {
     float: right;
     margin: 0px;
+    width: fit-content;
     border: 1px solid black;
+}
+
+#section1.heading {
+    background-color: orange;
+}
+
+#section2.heading {
+    background-color: aqua;
+}
+
+#section3.heading {
+    background-color: white;
 }
 
 /* Desktop devices */
@@ -65,11 +78,6 @@ h1 {
 
 /* Mobile Devices */
 @media (max-width: 767px) {
-    .menu-sections {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
     .section {
         width: 100%;
         margin-bottom: 20px;
