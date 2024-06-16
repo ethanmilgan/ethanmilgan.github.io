@@ -13,6 +13,10 @@ h1 {
     text-align: center;
 }
 
+h4 {
+    margin: 0px;
+}
+
 .section {
     padding: 0px;
     margin-bottom: 20px;
