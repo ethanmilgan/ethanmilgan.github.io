@@ -30,7 +30,9 @@ h4 {
     margin: 0px;
     padding: 10px;
     border: 1px solid black;
-    position: relative;
+    position: absolute;
+    top: 0;
+    right: 100%;
 }
 
 #section1 .heading {
