@@ -23,6 +23,7 @@ h1 {
 }
 
 p.heading {
+    margin: 0px;
     width: fit-content;
     height: fit-content;
     border: 1px solid black;
