@@ -40,11 +40,13 @@ h1 {
   position: relative;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .nav-item{
     display: none;
   }
+}
 
+@media (min-width: 992px) {
   #menu-sections {
     padding: 1%;
   }
