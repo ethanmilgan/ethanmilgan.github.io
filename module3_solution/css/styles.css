@@ -23,3 +23,14 @@ body {
 .navbar-brand a, .navbar-brand a:hover, .navbar-brand a:focus {
   text-decoration: none;
 }
+
+.nav-link {
+  font-weight: bold;
+  color: black;
+}
+
+@media (min-width: 992px) {
+  .nav-item{
+    display: none;
+  }
+}
