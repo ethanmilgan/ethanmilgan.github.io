@@ -72,7 +72,7 @@ export const seedPageSlides = [
   {
     page: "About Me",
     title: "Fashion direction with a digital-first point of view.",
-    text: "Meet Maison Mode, a fashion journal and creative studio for boutiques, stylists, emerging labels, and editorial teams.",
+    text: "Meet Style Edit by Reena, a fashion journal and creative studio for boutiques, stylists, emerging labels, and editorial teams.",
     href: "/about",
     buttonLabel: "About Me",
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=82",

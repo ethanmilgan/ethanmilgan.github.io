@@ -17,7 +17,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-[#ded3ca]/80 bg-[#fffaf6]/92 px-4 py-4 backdrop-blur-md sm:px-8 lg:px-14">
       <div className="flex min-h-11 items-center justify-between gap-5">
         <Link className="serif whitespace-nowrap text-2xl font-bold" href="/" onClick={() => setIsOpen(false)}>
-          Maison Mode
+          Style Edit by Reena
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-bold text-[#655e58] sm:flex" aria-label="Primary navigation">
@@ -71,7 +71,7 @@ export default function SiteHeader() {
         aria-hidden={!isOpen}
       >
         <div className="flex items-center justify-between gap-4">
-          <p className="serif text-2xl font-bold">Maison Mode</p>
+          <p className="serif text-2xl font-bold">Style Edit by Reena</p>
           <button
             aria-label="Close navigation menu"
             className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#ded3ca] bg-white text-[#171413]"

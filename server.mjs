@@ -24,6 +24,6 @@ app.prepare().then(() => {
   });
 
   server.listen(port, hostname, () => {
-    console.log(`Maison Mode running at http://${hostname}:${port}`);
+    console.log(`Style Edit by Reena running at http://${hostname}:${port}`);
   });
 });

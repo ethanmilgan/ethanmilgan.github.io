@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getProducts } from "@/app/lib/catalog";
 
 export const metadata = {
-  title: "Shop | Maison Mode"
+  title: "Shop | Style Edit by Reena"
 };
 
 export const dynamic = "force-dynamic";

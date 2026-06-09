@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export const metadata = {
-  title: "About Us | Maison Mode"
+  title: "About Me | Style Edit by Reena"
 };
 
 export default function AboutPage() {
@@ -14,7 +14,7 @@ export default function AboutPage() {
             Fashion direction with a digital-first point of view.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-[#655e58] sm:text-lg sm:leading-8">
-            Maison Mode is a fashion journal and creative studio for boutiques, stylists,
+            Style Edit by Reena is a fashion journal and creative studio for boutiques, stylists,
             emerging labels, and editorial teams that need polished storytelling online.
           </p>
         </div>

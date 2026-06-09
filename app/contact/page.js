@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Contact | Maison Mode"
+  title: "Contact | Style Edit by Reena"
 };
 
 export default function ContactPage() {

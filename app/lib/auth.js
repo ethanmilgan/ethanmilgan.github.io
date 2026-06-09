@@ -2,7 +2,7 @@ import crypto from "crypto";
 import { cookies } from "next/headers";
 import { getPostgresPool } from "./postgres";
 
-const sessionCookieName = "maison_mode_session";
+const sessionCookieName = "style_edit_by_reena_session";
 const sessionMaxAge = 60 * 60 * 8;
 
 function getAuthSecret() {

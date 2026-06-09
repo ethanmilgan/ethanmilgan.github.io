@@ -15,6 +15,6 @@ export async function getMongoDb() {
   cachedClient = cachedClient || new MongoClient(process.env.MONGODB_URI);
   await cachedClient.connect();
 
-  cachedDb = cachedClient.db(process.env.MONGODB_DB || "maison_mode");
+  cachedDb = cachedClient.db(process.env.MONGODB_DB || "style_edit_by_reena");
   return cachedDb;
 }

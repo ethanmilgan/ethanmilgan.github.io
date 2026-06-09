@@ -6,7 +6,7 @@ if (!process.env.MONGODB_URI) {
 }
 
 const client = new MongoClient(process.env.MONGODB_URI);
-const dbName = process.env.MONGODB_DB || "maison_mode";
+const dbName = process.env.MONGODB_DB || "style_edit_by_reena";
 
 async function upsertMany(collectionName, records, key) {
   const collection = client.db(dbName).collection(collectionName);
