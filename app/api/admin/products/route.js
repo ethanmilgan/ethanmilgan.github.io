@@ -26,15 +26,15 @@ function validateProduct(input) {
   const description = String(input.description || "").trim();
   const category = String(input.category || "").trim();
   const image = String(input.image || "").trim();
-  const price = String(input.price || "").trim();
+  const pricingNote = String(input.pricingNote || "Please inquire directly for pricing.").trim();
   const sortOrder = Number(input.sortOrder || 0);
   const isFeatured = Boolean(input.isFeatured);
 
-  if (!title || !slug || !description || !category || !image || !price) {
+  if (!title || !slug || !description || !category || !image || !pricingNote) {
     return null;
   }
 
-  return { title, slug, description, category, image, price, sortOrder, isFeatured };
+  return { title, slug, description, category, image, pricingNote, sortOrder, isFeatured };
 }
 
 export async function GET(request) {
@@ -62,7 +62,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "Missing required product fields." }, { status: 400 });
   }
 
-  await collection.updateOne({ slug: product.slug }, { $set: product }, { upsert: true });
+  await collection.updateOne({ slug: product.slug }, { $set: product, $unset: { price: "" } }, { upsert: true });
   return NextResponse.json({ product });
 }
 

@@ -1,5 +1,5 @@
 import { getMongoDb } from "./mongodb";
-import { seedCollections, seedPageSlides, seedProducts } from "./seed-data";
+import { seedPageSlides, seedProducts } from "./seed-data";
 
 function bySortOrder(left, right) {
   return (left.sortOrder || 0) - (right.sortOrder || 0);
@@ -22,6 +22,11 @@ export async function getProducts() {
   return products.sort(bySortOrder);
 }
 
+export async function getProductBySlug(slug) {
+  const products = await getProducts();
+  return products.find((product) => product.slug === slug) || null;
+}
+
 export async function getProductWriteCollection() {
   const db = await getMongoDb();
 
@@ -30,11 +35,6 @@ export async function getProductWriteCollection() {
   }
 
   return db.collection("products");
-}
-
-export async function getCollections() {
-  const collections = await readMongoCollection("collections", seedCollections);
-  return collections.sort(bySortOrder);
 }
 
 export async function getPageSlides() {

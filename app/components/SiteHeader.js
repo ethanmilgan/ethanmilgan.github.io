@@ -14,21 +14,21 @@ export default function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#ded3ca]/80 bg-[#fffaf6]/92 px-4 py-4 backdrop-blur-md sm:px-8 lg:px-14">
+    <header className="sticky top-0 z-50 border-b border-[#d8c1b4]/80 bg-[#fff7f1]/92 px-4 py-4 backdrop-blur-md sm:px-8 lg:px-14">
       <div className="flex min-h-11 items-center justify-between gap-5">
         <Link className="serif whitespace-nowrap text-2xl font-bold" href="/" onClick={() => setIsOpen(false)}>
-          Style Edit by Reena
+          styleeditbyreena
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm font-bold text-[#655e58] sm:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-6 text-sm font-bold text-[#6f5d55] sm:flex" aria-label="Primary navigation">
           {navItems.map((item) => (
-            <Link className="hover:text-[#c83256]" href={item.href} key={item.href}>
+            <Link className="hover:text-[#b76a7a]" href={item.href} key={item.href}>
               {item.label}
             </Link>
           ))}
           <Link
             aria-label="Account"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#ded3ca] bg-white text-[#171413] hover:border-[#c83256] hover:text-[#c83256]"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d8c1b4] bg-white text-[#2b2320] hover:border-[#b76a7a] hover:text-[#b76a7a]"
             href="/account"
             title="Account"
           >
@@ -43,7 +43,7 @@ export default function SiteHeader() {
           aria-controls="mobile-site-menu"
           aria-expanded={isOpen}
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#ded3ca] bg-white text-[#171413] transition hover:border-[#c83256] hover:text-[#c83256] sm:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#d8c1b4] bg-white text-[#2b2320] transition hover:border-[#b76a7a] hover:text-[#b76a7a] sm:hidden"
           onClick={() => setIsOpen((current) => !current)}
           type="button"
         >
@@ -57,24 +57,24 @@ export default function SiteHeader() {
       </div>
 
       <div
-        className={`fixed inset-0 z-40 bg-[#171413]/45 transition-opacity sm:hidden ${
+        className={`fixed inset-0 z-40 bg-[#2b2320]/45 transition-opacity sm:hidden ${
           isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setIsOpen(false)}
       />
 
       <aside
-        className={`fixed right-0 top-0 z-50 flex h-dvh w-[min(82vw,340px)] flex-col border-l border-[#ded3ca] bg-[#fffaf6] p-5 shadow-[-24px_0_70px_rgba(23,20,19,0.22)] transition-transform duration-300 sm:hidden ${
+        className={`fixed right-0 top-0 z-50 flex h-dvh w-[min(82vw,340px)] flex-col border-l border-[#d8c1b4] bg-[#fff7f1] p-5 shadow-[-24px_0_70px_rgba(43,35,32,0.22)] transition-transform duration-300 sm:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         id="mobile-site-menu"
         aria-hidden={!isOpen}
       >
         <div className="flex items-center justify-between gap-4">
-          <p className="serif text-2xl font-bold">Style Edit by Reena</p>
+          <p className="serif text-2xl font-bold">styleeditbyreena</p>
           <button
             aria-label="Close navigation menu"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#ded3ca] bg-white text-[#171413]"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#d8c1b4] bg-white text-[#2b2320]"
             onClick={() => setIsOpen(false)}
             type="button"
           >
@@ -85,10 +85,10 @@ export default function SiteHeader() {
           </button>
         </div>
 
-        <nav className="mt-8 grid gap-3 text-base font-black text-[#171413]" aria-label="Mobile navigation">
+        <nav className="mt-8 grid gap-3 text-base font-black text-[#2b2320]" aria-label="Mobile navigation">
           {navItems.map((item) => (
             <Link
-              className="rounded-lg border border-[#ded3ca] bg-white px-4 py-4 hover:border-[#c83256] hover:text-[#c83256]"
+              className="rounded-lg border border-[#d8c1b4] bg-white px-4 py-4 hover:border-[#b76a7a] hover:text-[#b76a7a]"
               href={item.href}
               key={item.href}
               onClick={() => setIsOpen(false)}
@@ -97,7 +97,7 @@ export default function SiteHeader() {
             </Link>
           ))}
           <Link
-            className="flex items-center justify-between rounded-lg border border-[#ded3ca] bg-white px-4 py-4 hover:border-[#c83256] hover:text-[#c83256]"
+            className="flex items-center justify-between rounded-lg border border-[#d8c1b4] bg-white px-4 py-4 hover:border-[#b76a7a] hover:text-[#b76a7a]"
             href="/account"
             onClick={() => setIsOpen(false)}
           >

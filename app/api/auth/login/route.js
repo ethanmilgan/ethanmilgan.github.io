@@ -18,7 +18,8 @@ export async function POST(request) {
     user: {
       id: user.id,
       email: user.email,
-      name: user.name,
+      firstName: user.first_name,
+      lastName: user.last_name,
       role: user.role
     }
   });

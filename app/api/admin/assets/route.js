@@ -1,0 +1,60 @@
+import { NextResponse } from "next/server";
+import { createImageAsset, deleteImageAsset, getImageAssets } from "@/app/lib/assets";
+import { getSessionFromRequest, isAdmin } from "@/app/lib/auth";
+
+function requireAdmin(request) {
+  const session = getSessionFromRequest(request);
+
+  if (!isAdmin(session)) {
+    return null;
+  }
+
+  return session;
+}
+
+export async function GET(request) {
+  if (!requireAdmin(request)) {
+    return NextResponse.json({ error: "Administrator access is required." }, { status: 403 });
+  }
+
+  return NextResponse.json({ assets: await getImageAssets() });
+}
+
+export async function POST(request) {
+  if (!requireAdmin(request)) {
+    return NextResponse.json({ error: "Administrator access is required." }, { status: 403 });
+  }
+
+  const formData = await request.formData();
+  const result = await createImageAsset({
+    file: formData.get("file"),
+    altText: formData.get("altText"),
+    section: formData.get("section")
+  });
+
+  if (result.error) {
+    return NextResponse.json({ error: result.error }, { status: 400 });
+  }
+
+  return NextResponse.json({ asset: result.asset }, { status: 201 });
+}
+
+export async function DELETE(request) {
+  if (!requireAdmin(request)) {
+    return NextResponse.json({ error: "Administrator access is required." }, { status: 403 });
+  }
+
+  const { id } = await request.json();
+
+  if (!id) {
+    return NextResponse.json({ error: "Image asset id is required." }, { status: 400 });
+  }
+
+  const deleted = await deleteImageAsset(id);
+
+  if (!deleted) {
+    return NextResponse.json({ error: "Image asset was not found." }, { status: 404 });
+  }
+
+  return NextResponse.json({ ok: true });
+}

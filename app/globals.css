@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fffaf6;
-  --foreground: #171413;
+  --background: #fff7f1;
+  --foreground: #2b2320;
+  --reena-ivory: #fff7f1;
+  --reena-blush: #f2cbd1;
+  --reena-rose: #b76a7a;
+  --reena-mauve: #9f5f6f;
+  --reena-champagne: #d8c1b4;
+  --reena-peach: #f7e8df;
+  --reena-cocoa: #6f5d55;
+  --reena-charcoal: #2b2320;
 }
 
 * {

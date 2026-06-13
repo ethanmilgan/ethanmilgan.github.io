@@ -36,7 +36,8 @@ export function createSessionToken(user) {
     JSON.stringify({
       id: user.id,
       email: user.email,
-      name: user.name,
+      firstName: user.first_name,
+      lastName: user.last_name,
       role: user.role,
       exp: Math.floor(Date.now() / 1000) + sessionMaxAge
     })
@@ -102,7 +103,7 @@ export async function findUserByEmail(email) {
   }
 
   const result = await pool.query(
-    "SELECT id, email, name, role, password_hash, password_salt FROM users WHERE lower(email) = lower($1) LIMIT 1",
+    "SELECT id, email, first_name, last_name, role, password_hash, password_salt FROM users WHERE lower(email) = lower($1) LIMIT 1",
     [email]
   );
 
@@ -123,13 +124,10 @@ export async function createCustomerUser({ firstName, lastName, dateOfBirth, ema
   }
 
   const { hash, salt } = hashPassword(password);
-  const name = `${firstName} ${lastName}`.trim();
-
   const result = await pool.query(
     `
       INSERT INTO users (
         email,
-        name,
         first_name,
         last_name,
         date_of_birth,
@@ -138,10 +136,10 @@ export async function createCustomerUser({ firstName, lastName, dateOfBirth, ema
         password_hash,
         password_salt
       )
-      VALUES ($1, $2, $3, $4, $5, $6, 'customer', $7, $8)
-      RETURNING id, email, name, role
+      VALUES ($1, $2, $3, $4, $5, 'customer', $6, $7)
+      RETURNING id, email, first_name, last_name, role
     `,
-    [email, name, firstName, lastName, dateOfBirth, phoneNumber, hash, salt]
+    [email, firstName, lastName, dateOfBirth, phoneNumber, hash, salt]
   );
 
   return { user: result.rows[0] };

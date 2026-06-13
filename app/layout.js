@@ -2,7 +2,7 @@ import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 
 export const metadata = {
-  title: "Style Edit by Reena | Fashion Journal & Portfolio",
+  title: "styleeditbyreena | Fashion Journal & Portfolio",
   description:
     "A reactive fashion blog and portfolio built with Next.js, React, and Tailwind CSS."
 };

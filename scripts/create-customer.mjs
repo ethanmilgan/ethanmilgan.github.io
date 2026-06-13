@@ -5,7 +5,8 @@ const { Pool } = pg;
 
 const email = process.env.CUSTOMER_EMAIL;
 const password = process.env.CUSTOMER_PASSWORD;
-const name = process.env.CUSTOMER_NAME || "Customer";
+const firstName = process.env.CUSTOMER_FIRST_NAME || "Customer";
+const lastName = process.env.CUSTOMER_LAST_NAME || "User";
 
 if (!process.env.POSTGRES_URL) {
   throw new Error("POSTGRES_URL is required.");
@@ -21,15 +22,16 @@ const pool = new Pool({ connectionString: process.env.POSTGRES_URL });
 
 await pool.query(
   `
-    INSERT INTO users (email, name, role, password_hash, password_salt)
-    VALUES ($1, $2, 'customer', $3, $4)
+    INSERT INTO users (email, first_name, last_name, role, password_hash, password_salt)
+    VALUES ($1, $2, $3, 'customer', $4, $5)
     ON CONFLICT (email) DO UPDATE SET
-      name = EXCLUDED.name,
+      first_name = EXCLUDED.first_name,
+      last_name = EXCLUDED.last_name,
       role = 'customer',
       password_hash = EXCLUDED.password_hash,
       password_salt = EXCLUDED.password_salt
   `,
-  [email, name, passwordHash, salt]
+  [email, firstName, lastName, passwordHash, salt]
 );
 
 await pool.end();

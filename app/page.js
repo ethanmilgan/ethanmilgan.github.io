@@ -41,33 +41,6 @@ const stories = [
   }
 ];
 
-const fallbackCollections = [
-  {
-    name: "Noir Capsule",
-    label: "Evening editorial",
-    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=82",
-    description:
-      "A monochrome capsule built around bias-cut satin, lacquered accessories, and cinematic close crops.",
-    stats: ["18 looks", "6 hero images", "42% longer dwell time"]
-  },
-  {
-    name: "Market Week",
-    label: "Buyer preview",
-    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=82",
-    description:
-      "A buyer-facing portfolio with line-sheet summaries, fabric notes, and fast mobile browsing.",
-    stats: ["4 drops", "Responsive grids", "Inquiry-ready"]
-  },
-  {
-    name: "Resort Forms",
-    label: "Lookbook",
-    image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=1200&q=82",
-    description:
-      "Warm-weather silhouettes photographed for social crops, campaign landing pages, and editorial mailers.",
-    stats: ["12 stories", "Social assets", "SEO copy"]
-  }
-];
-
 const tiers = {
   Portfolio: "$1,000-$5,000",
   Boutique: "$5,000-$20,000",
@@ -78,7 +51,7 @@ const fallbackPageSlides = [
   {
     page: "About Me",
     title: "Fashion direction with a digital-first point of view.",
-    text: "Meet Style Edit by Reena, a fashion journal and creative studio for boutiques, stylists, emerging labels, and editorial teams.",
+    text: "Meet styleeditbyreena, a fashion journal and creative studio for boutiques, stylists, emerging labels, and editorial teams.",
     href: "/about",
     buttonLabel: "About Me",
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=82"
@@ -101,11 +74,33 @@ const fallbackPageSlides = [
   }
 ];
 
+const fallbackProducts = [
+  {
+    slug: "style-consultation",
+    title: "Style Consultation",
+    description: "A personalized virtual or in-person session to understand your lifestyle, goals, wardrobe needs, and style direction.",
+    category: "Services",
+    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=82",
+    pricingNote: "Please inquire directly for pricing.",
+    sortOrder: 1,
+    isFeatured: true
+  },
+  {
+    slug: "personal-styling-lookbook",
+    title: "Personal Styling & Lookbook",
+    description: "A fully curated style guide with complete outfits tailored to work, lifestyle, photoshoot, travel, and everyday needs.",
+    category: "Services",
+    image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=1200&q=82",
+    pricingNote: "Please inquire directly for pricing.",
+    sortOrder: 2,
+    isFeatured: true
+  }
+];
+
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [collections, setCollections] = useState(fallbackCollections);
   const [pageSlides, setPageSlides] = useState(fallbackPageSlides);
-  const [activeCollection, setActiveCollection] = useState(fallbackCollections[0]);
+  const [products, setProducts] = useState(fallbackProducts);
   const [siteType, setSiteType] = useState("Portfolio");
   const [commerce, setCommerce] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -120,6 +115,7 @@ export default function Home() {
 
   const estimate = commerce && siteType === "Portfolio" ? "$5,000-$20,000" : tiers[siteType];
   const currentSlide = pageSlides[activeSlide];
+  const featuredProducts = products.filter((product) => product.isFeatured).slice(0, 4);
 
   const showPreviousSlide = () => {
     setActiveSlide((current) => (current === 0 ? pageSlides.length - 1 : current - 1));
@@ -149,14 +145,13 @@ export default function Home() {
         return;
       }
 
-      if (catalog.collections?.length) {
-        setCollections(catalog.collections);
-        setActiveCollection(catalog.collections[0]);
-      }
-
       if (catalog.pageSlides?.length) {
         setPageSlides(catalog.pageSlides);
         setActiveSlide(0);
+      }
+
+      if (catalog.products?.length) {
+        setProducts(catalog.products);
       }
     }
 
@@ -174,8 +169,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#fffaf6] text-[#171413]">
-      <section className="relative min-h-[calc(100vh-77px)] overflow-hidden bg-[#171413] text-white" aria-label="Page highlights slider">
+    <main className="min-h-screen bg-[#fff7f1] text-[#2b2320]">
+      <section className="relative min-h-[calc(100vh-77px)] overflow-hidden bg-[#2b2320] text-white" aria-label="Page highlights slider">
         {pageSlides.map((slide, index) => (
           <Image
             alt={`${slide.page} fashion preview`}
@@ -189,11 +184,11 @@ export default function Home() {
             src={slide.image}
           />
         ))}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(23,20,19,0.88),rgba(23,20,19,0.5)_55%,rgba(23,20,19,0.16))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(43,35,32,0.88),rgba(43,35,32,0.5)_55%,rgba(43,35,32,0.16))]" />
 
         <div className="relative z-10 flex min-h-[calc(100vh-77px)] items-end px-4 pb-10 pt-20 sm:px-8 lg:px-14">
           <div className="w-full max-w-4xl pb-4 sm:pb-[8vh]">
-            <p className="mb-4 text-xs font-black uppercase tracking-normal text-[#f1bcc4]">
+            <p className="mb-4 text-xs font-black uppercase tracking-normal text-[#f2cbd1]">
               {currentSlide.page}
             </p>
             <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
@@ -205,7 +200,7 @@ export default function Home() {
 
             <div className="mt-8 flex flex-col gap-5 min-[520px]:flex-row min-[520px]:items-center">
               <Link
-                className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#c83256] px-5 py-3 text-sm font-black text-white min-[520px]:w-auto"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#b76a7a] px-5 py-3 text-sm font-black text-white min-[520px]:w-auto"
                 href={currentSlide.href}
               >
                 {currentSlide.buttonLabel}
@@ -214,7 +209,7 @@ export default function Home() {
               <div className="flex items-center gap-3">
                 <button
                   aria-label="Previous slide"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/30 text-2xl leading-none hover:border-[#f1bcc4] hover:text-[#f1bcc4]"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/30 text-2xl leading-none hover:border-[#f2cbd1] hover:text-[#f2cbd1]"
                   onClick={showPreviousSlide}
                   type="button"
                 >
@@ -222,7 +217,7 @@ export default function Home() {
                 </button>
                 <button
                   aria-label="Next slide"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/30 text-2xl leading-none hover:border-[#f1bcc4] hover:text-[#f1bcc4]"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/30 text-2xl leading-none hover:border-[#f2cbd1] hover:text-[#f2cbd1]"
                   onClick={showNextSlide}
                   type="button"
                 >
@@ -237,7 +232,7 @@ export default function Home() {
               <button
                 aria-label={`Show ${slide.page} slide`}
                 className={`h-3 w-8 rounded-full transition ${
-                  activeSlide === index ? "bg-[#f1bcc4]" : "bg-white/35 hover:bg-white/60"
+                  activeSlide === index ? "bg-[#f2cbd1]" : "bg-white/35 hover:bg-white/60"
                 }`}
                 key={slide.page}
                 onClick={() => setActiveSlide(index)}
@@ -248,79 +243,48 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="grid gap-4 bg-[#171413] px-4 py-6 text-white sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:px-14">
-        {[
-          ["Frontend", "Next.js + React"],
-          ["Styling", "Tailwind CSS"],
-          ["Commerce Path", "Shopify / WooCommerce"],
-          ["Media", "Cloudinary-ready imagery"]
-        ].map(([label, value]) => (
-          <div className="border-l border-white/20 pl-4" key={label}>
-            <p className="text-xs font-black uppercase tracking-normal text-[#f1bcc4]">{label}</p>
-            <p className="mt-1 text-lg font-black">{value}</p>
-          </div>
-        ))}
-      </section>
-
-      <section id="collections" className="px-4 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-28">
-        <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <section className="px-4 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-24" aria-labelledby="featured-products-title">
+        <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#b92e4d]">Portfolio</p>
-            <h2 className="serif max-w-3xl text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
-              Collections with enough detail to sell the vision.
+            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Featured products</p>
+            <h2 id="featured-products-title" className="serif max-w-3xl text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
+              Curated pieces Reena is highlighting now.
             </h2>
           </div>
-          <div className="grid w-full grid-cols-1 gap-2 min-[420px]:grid-cols-3 lg:w-auto">
-            {collections.map((collection) => (
-              <button
-                className={`min-h-11 rounded-lg border px-4 py-3 text-sm font-black transition ${
-                  activeCollection.name === collection.name
-                    ? "border-[#171413] bg-[#171413] text-white"
-                    : "border-[#ded3ca] bg-white text-[#5f5852] hover:border-[#171413]"
-                }`}
-                key={collection.name}
-                onClick={() => setActiveCollection(collection)}
-                type="button"
-              >
-                {collection.name}
-              </button>
+          <Link className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-[#d8c1b4] bg-white px-5 py-3 text-sm font-black min-[420px]:w-fit" href="/shop">
+            Shop all
+          </Link>
+        </div>
+
+        {featuredProducts.length ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+            {featuredProducts.map((product) => (
+              <Link className="block overflow-hidden rounded-lg border border-[#d8c1b4] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(43,35,32,0.12)]" href={`/shop/${product.slug}`} key={product.slug}>
+                <div className="relative aspect-[5/6]">
+                  <Image src={product.image} alt={product.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                </div>
+                <div className="p-4">
+                  <p className="text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{product.category}</p>
+                  <h3 className="mt-2 text-lg font-black leading-tight">{product.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#6f5d55]">{product.description}</p>
+                </div>
+              </Link>
             ))}
           </div>
-        </div>
-
-        <div className="grid overflow-hidden rounded-lg border border-[#ded3ca] bg-white shadow-[0_24px_70px_rgba(23,20,19,0.13)] lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="relative min-h-[320px] sm:min-h-[440px]">
-            <Image
-              src={activeCollection.image}
-              alt={`${activeCollection.name} fashion collection`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 60vw"
-            />
+        ) : (
+          <div className="rounded-lg border border-[#d8c1b4] bg-white p-6">
+            <h3 className="text-xl font-black">No featured products selected</h3>
+            <p className="mt-3 leading-7 text-[#6f5d55]">
+              Administrators can choose featured products in the CMS by checking the Featured field.
+            </p>
           </div>
-          <div className="flex flex-col justify-between p-5 sm:p-8 lg:p-10">
-            <div>
-              <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#b92e4d]">
-                {activeCollection.label}
-              </p>
-              <h3 className="serif text-3xl font-bold leading-none sm:text-4xl">{activeCollection.name}</h3>
-              <p className="mt-5 text-base leading-7 text-[#655e58] sm:text-lg sm:leading-8">{activeCollection.description}</p>
-            </div>
-            <div className="mt-10 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-              {activeCollection.stats.map((stat) => (
-                <div className="rounded-lg bg-[#f4eee7] px-4 py-3 text-sm font-black" key={stat}>
-                  {stat}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        )}
       </section>
 
-      <section id="journal" className="bg-[#f4eee7] px-4 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-28">
+      <section id="journal" className="bg-[#f7e8df] px-4 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-28">
         <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#b92e4d]">Journal</p>
+            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Journal</p>
             <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">Fashion-first publishing.</h2>
           </div>
           <div className="grid w-full grid-cols-2 gap-2 min-[520px]:flex min-[520px]:w-auto min-[520px]:flex-wrap">
@@ -328,8 +292,8 @@ export default function Home() {
               <button
                 className={`min-h-11 rounded-lg border px-4 py-3 text-sm font-black transition ${
                   activeCategory === category
-                    ? "border-[#171413] bg-[#171413] text-white"
-                    : "border-[#d4c8bd] bg-[#fffaf6] text-[#5f5852] hover:border-[#171413]"
+                    ? "border-[#2b2320] bg-[#2b2320] text-white"
+                    : "border-[#d8c1b4] bg-[#fff7f1] text-[#5f5852] hover:border-[#2b2320]"
                 }`}
                 key={category}
                 onClick={() => setActiveCategory(category)}
@@ -343,16 +307,16 @@ export default function Home() {
 
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {filteredStories.map((story) => (
-            <article className="overflow-hidden rounded-lg border border-[#ded3ca] bg-[#fffaf6]" key={story.title}>
+            <article className="overflow-hidden rounded-lg border border-[#d8c1b4] bg-[#fff7f1]" key={story.title}>
               <div className="relative aspect-[4/5]">
                 <Image src={story.image} alt={story.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 25vw" />
               </div>
               <div className="p-5">
-                <p className="text-xs font-black uppercase tracking-normal text-[#b92e4d]">
+                <p className="text-xs font-black uppercase tracking-normal text-[#9f5f6f]">
                   {story.category} / {story.date}
                 </p>
                 <h3 className="mt-3 text-xl font-black leading-tight">{story.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#655e58]">{story.summary}</p>
+                <p className="mt-3 text-sm leading-6 text-[#6f5d55]">{story.summary}</p>
               </div>
             </article>
           ))}
@@ -361,22 +325,22 @@ export default function Home() {
 
       <section id="studio" className="grid gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28">
         <div>
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#b92e4d]">Interactive planner</p>
+          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Interactive planner</p>
           <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">Plan the right fashion website phase.</h2>
-          <p className="mt-6 max-w-xl text-base leading-7 text-[#655e58] sm:text-lg sm:leading-8">
+          <p className="mt-6 max-w-xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">
             The guide recommends matching cost and technology to complexity. Use this lightweight planner to
             pick the right starting point before adding payments, advanced search, or account features.
           </p>
         </div>
 
-        <div className="rounded-lg border border-[#ded3ca] bg-white p-5 shadow-[0_20px_60px_rgba(23,20,19,0.1)] sm:p-6">
+        <div className="rounded-lg border border-[#d8c1b4] bg-white p-5 shadow-[0_20px_60px_rgba(43,35,32,0.1)] sm:p-6">
           <div className="grid gap-3 min-[520px]:grid-cols-3">
             {Object.keys(tiers).map((type) => (
               <button
                 className={`rounded-lg border px-4 py-4 text-left font-black ${
                   siteType === type
-                    ? "border-[#c83256] bg-[#c83256] text-white"
-                    : "border-[#ded3ca] bg-[#fffaf6] text-[#171413]"
+                    ? "border-[#b76a7a] bg-[#b76a7a] text-white"
+                    : "border-[#d8c1b4] bg-[#fff7f1] text-[#2b2320]"
                 }`}
                 key={type}
                 onClick={() => setSiteType(type)}
@@ -387,18 +351,18 @@ export default function Home() {
             ))}
           </div>
 
-          <label className="mt-6 flex cursor-pointer items-center justify-between gap-4 rounded-lg bg-[#f4eee7] p-4 text-sm font-black">
+          <label className="mt-6 flex cursor-pointer items-center justify-between gap-4 rounded-lg bg-[#f7e8df] p-4 text-sm font-black">
             Add e-commerce checkout path
             <input
               checked={commerce}
-              className="h-5 w-5 accent-[#c83256]"
+              className="h-5 w-5 accent-[#b76a7a]"
               onChange={(event) => setCommerce(event.target.checked)}
               type="checkbox"
             />
           </label>
 
-          <div className="mt-6 rounded-lg bg-[#171413] p-6 text-white">
-            <p className="text-xs font-black uppercase tracking-normal text-[#f1bcc4]">Estimated build range</p>
+          <div className="mt-6 rounded-lg bg-[#2b2320] p-6 text-white">
+            <p className="text-xs font-black uppercase tracking-normal text-[#f2cbd1]">Estimated build range</p>
             <p className="serif mt-2 text-4xl font-bold sm:text-5xl">{estimate}</p>
             <p className="mt-4 leading-7 text-white/75">
               Suggested stack: Next.js and React for the interface, Tailwind CSS for styling,
@@ -416,15 +380,15 @@ export default function Home() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[#171413]/75" />
+        <div className="absolute inset-0 bg-[#2b2320]/75" />
         <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#f1bcc4]">Contact</p>
+            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#f2cbd1]">Contact</p>
             <h2 className="serif max-w-4xl text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
               Ready for a fashion site that feels as considered as the collection?
             </h2>
           </div>
-          <a className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#c83256] px-5 py-3 text-sm font-black text-white min-[420px]:w-fit" href="mailto:hello@example.com">
+          <a className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#b76a7a] px-5 py-3 text-sm font-black text-white min-[420px]:w-fit" href="mailto:hello@example.com">
             hello@example.com
           </a>
         </div>

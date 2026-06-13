@@ -1,20 +1,20 @@
 import Image from "next/image";
 
 export const metadata = {
-  title: "About Me | Style Edit by Reena"
+  title: "About Me | styleeditbyreena"
 };
 
 export default function AboutPage() {
   return (
-    <main className="bg-[#fffaf6] text-[#171413]">
+    <main className="bg-[#fff7f1] text-[#2b2320]">
       <section className="grid gap-10 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28">
         <div>
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#b92e4d]">About Me</p>
+          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">About Me</p>
           <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
             Fashion direction with a digital-first point of view.
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-[#655e58] sm:text-lg sm:leading-8">
-            Style Edit by Reena is a fashion journal and creative studio for boutiques, stylists,
+          <p className="mt-6 max-w-2xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">
+            styleeditbyreena is a fashion journal and creative studio for boutiques, stylists,
             emerging labels, and editorial teams that need polished storytelling online.
           </p>
         </div>
@@ -29,7 +29,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="grid gap-5 bg-[#171413] px-4 py-16 text-white sm:grid-cols-2 sm:px-8 lg:grid-cols-3 lg:px-14">
+      <section className="grid gap-5 bg-[#2b2320] px-4 py-16 text-white sm:grid-cols-2 sm:px-8 lg:grid-cols-3 lg:px-14">
         {[
           ["Editorial taste", "We shape visual stories around silhouettes, texture, styling, and campaign mood."],
           ["Practical systems", "We build pages that are easy to scan, update, and extend as a label grows."],

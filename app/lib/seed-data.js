@@ -1,70 +1,73 @@
 export const seedProducts = [
   {
-    slug: "noir-capsule-lookbook",
-    title: "Noir Capsule Lookbook",
-    description: "Eveningwear edits with satin slips, structured blazers, lacquered accessories, and campaign-ready styling.",
-    category: "Lookbook",
+    slug: "style-consultation",
+    title: "Style Consultation",
+    description: "A personalized virtual or in-person session to understand your lifestyle, goals, wardrobe needs, and style direction.",
+    category: "Services",
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=82",
-    price: "$148",
+    pricingNote: "Please inquire directly for pricing.",
     sortOrder: 1,
     isFeatured: true
   },
   {
-    slug: "resort-forms-collection",
-    title: "Resort Forms Collection",
-    description: "Lightweight separates, warm-weather silhouettes, and social-first outfit stories for boutique drops.",
-    category: "Collection",
+    slug: "personal-styling-lookbook",
+    title: "Personal Styling & Lookbook",
+    description: "A fully curated style guide with complete outfits tailored to work, lifestyle, photoshoot, travel, and everyday needs.",
+    category: "Services",
     image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=1200&q=82",
-    price: "$126",
+    pricingNote: "Please inquire directly for pricing.",
     sortOrder: 2,
     isFeatured: true
   },
   {
-    slug: "market-week-buyer-edit",
-    title: "Market Week Buyer Edit",
-    description: "Curated line-sheet selections with fabric notes, size runs, collection highlights, and inquiry-ready product copy.",
-    category: "Buyer Edit",
+    slug: "virtual-try-on-session",
+    title: "Virtual Try-On Session",
+    description: "A guided session to review your pieces, finalize outfits, make confident styling choices, and ensure the right fit.",
+    category: "Services",
     image: "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=82",
-    price: "$96",
+    pricingNote: "Please inquire directly for pricing.",
     sortOrder: 3,
     isFeatured: true
   },
   {
-    slug: "studio-essentials",
-    title: "Studio Essentials",
-    description: "Foundational styling pieces for editorial shoots, capsule wardrobes, product pages, and seasonal refreshes.",
-    category: "Essentials",
+    slug: "closet-edit",
+    title: "Closet Edit",
+    description: "An in-person wardrobe refinement service focused on decluttering, outfit creation, organization, and identifying wardrobe gaps.",
+    category: "Services",
     image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=82",
-    price: "$84",
+    pricingNote: "Please inquire directly for pricing.",
     sortOrder: 4,
+    isFeatured: true
+  },
+  {
+    slug: "photoshoot-styling",
+    title: "Photoshoot Styling",
+    description: "Styling direction for polished final images, including pre-shoot consultation, outfit planning, and day-of creative support.",
+    category: "Services",
+    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=82",
+    pricingNote: "Please inquire directly for pricing.",
+    sortOrder: 5,
     isFeatured: false
-  }
-];
-
-export const seedCollections = [
-  {
-    name: "Noir Capsule",
-    label: "Evening editorial",
-    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=82",
-    description: "A monochrome capsule built around bias-cut satin, lacquered accessories, and cinematic close crops.",
-    stats: ["18 looks", "6 hero images", "42% longer dwell time"],
-    sortOrder: 1
   },
   {
-    name: "Market Week",
-    label: "Buyer preview",
-    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=82",
-    description: "A buyer-facing portfolio with line-sheet summaries, fabric notes, and fast mobile browsing.",
-    stats: ["4 drops", "Responsive grids", "Inquiry-ready"],
-    sortOrder: 2
+    slug: "event-or-trip-styling",
+    title: "Event or Trip Styling",
+    description: "Outfit planning for work trips, events, and special occasions with itinerary styling, packing lists, and mix-and-match combinations.",
+    category: "Services",
+    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=82",
+    pricingNote: "Please inquire directly for pricing.",
+    sortOrder: 6,
+    isFeatured: false
   },
   {
-    name: "Resort Forms",
-    label: "Lookbook",
-    image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=1200&q=82",
-    description: "Warm-weather silhouettes photographed for social crops, campaign landing pages, and editorial mailers.",
-    stats: ["12 stories", "Social assets", "SEO copy"],
-    sortOrder: 3
+    slug: "styling-add-ons",
+    title: "Styling Add Ons",
+    description: "Additional support options such as rush styling, in-home fittings, and ongoing styling support by text or email.",
+    category: "Services",
+    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=82",
+    pricingNote: "Please inquire directly for pricing.",
+    sortOrder: 7,
+    isFeatured: false
   }
 ];
 
@@ -72,7 +75,7 @@ export const seedPageSlides = [
   {
     page: "About Me",
     title: "Fashion direction with a digital-first point of view.",
-    text: "Meet Style Edit by Reena, a fashion journal and creative studio for boutiques, stylists, emerging labels, and editorial teams.",
+    text: "Meet styleeditbyreena, a fashion journal and creative studio for boutiques, stylists, emerging labels, and editorial teams.",
     href: "/about",
     buttonLabel: "About Me",
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=82",

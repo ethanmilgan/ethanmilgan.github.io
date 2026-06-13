@@ -10,7 +10,6 @@ await pool.query(`
   CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
-    name TEXT,
     first_name TEXT,
     last_name TEXT,
     date_of_birth DATE,
@@ -38,6 +37,8 @@ await pool.query(`
   );
 
   CREATE INDEX IF NOT EXISTS orders_user_id_created_at_idx ON orders(user_id, created_at DESC);
+
+  ALTER TABLE users DROP COLUMN IF EXISTS name;
 `);
 
 await pool.end();
