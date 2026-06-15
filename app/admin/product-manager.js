@@ -265,13 +265,13 @@ export default function AdminProductManager({ initialAssets, initialProducts }) 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {assets.map((asset) => (
               <article className="overflow-hidden rounded-lg border border-[#d8c1b4] bg-[#fff7f1]" key={asset.id}>
-                <div className="aspect-[4/3] bg-[#f7e8df]">
+                <div className="aspect-4/3 bg-[#f7e8df]">
                   <img alt={asset.altText || asset.filename} className="h-full w-full object-cover" src={asset.url} />
                 </div>
                 <div className="grid gap-3 p-4">
                   <div>
                     <p className="text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{asset.section}</p>
-                    <h3 className="mt-1 break-words text-sm font-black">{asset.filename}</h3>
+                    <h3 className="mt-1 wrap-break-word text-sm font-black">{asset.filename}</h3>
                   </div>
                   <p className="text-xs font-bold text-[#6f5d55]">{Math.round(asset.size / 1024)} KB</p>
                   <div className="grid gap-2 min-[420px]:grid-cols-2">

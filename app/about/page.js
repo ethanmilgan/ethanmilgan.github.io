@@ -18,7 +18,7 @@ export default function AboutPage() {
             emerging labels, and editorial teams that need polished storytelling online.
           </p>
         </div>
-        <div className="relative min-h-[320px] overflow-hidden rounded-lg sm:min-h-[520px]">
+        <div className="relative min-h-80 overflow-hidden rounded-lg sm:min-h-130">
           <Image
             src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=82"
             alt="Fashion editorial studio shoot"

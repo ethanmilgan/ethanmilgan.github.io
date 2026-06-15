@@ -34,7 +34,7 @@ export default async function ShopPage() {
       <section className="grid gap-4 px-4 py-16 sm:grid-cols-2 sm:px-8 sm:py-20 lg:grid-cols-3 xl:grid-cols-4 lg:px-14">
         {shopItems.map((item) => (
           <Link className="block overflow-hidden rounded-lg border border-[#d8c1b4] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(43,35,32,0.12)]" href={`/shop/${item.slug}`} key={item.slug}>
-            <div className="relative aspect-[5/6]">
+            <div className="relative aspect-5/6">
               <Image src={item.image} alt={item.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
             </div>
             <div className="p-4">

@@ -260,7 +260,7 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {featuredProducts.map((product) => (
               <Link className="block overflow-hidden rounded-lg border border-[#d8c1b4] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(43,35,32,0.12)]" href={`/shop/${product.slug}`} key={product.slug}>
-                <div className="relative aspect-[5/6]">
+                <div className="relative aspect-5/6">
                   <Image src={product.image} alt={product.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                 </div>
                 <div className="p-4">
@@ -308,7 +308,7 @@ export default function Home() {
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {filteredStories.map((story) => (
             <article className="overflow-hidden rounded-lg border border-[#d8c1b4] bg-[#fff7f1]" key={story.title}>
-              <div className="relative aspect-[4/5]">
+              <div className="relative aspect-4/5">
                 <Image src={story.image} alt={story.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 25vw" />
               </div>
               <div className="p-5">
