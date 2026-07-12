@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import GlobalContactUsSection from "./components/GlobalContactUsSection";
 import SiteHeader from "./components/SiteHeader";
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
         <SiteHeader />
         {children}
         <GlobalContactUsSection />
+        <Analytics />
       </body>
     </html>
   );
