@@ -4,11 +4,11 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="bg-[#fff7f1] px-4 py-16 text-[#2b2320] sm:px-8 sm:py-20 lg:px-14 lg:py-28">
+    <main className="bg-[#fff7f1] px-4 py-16 text-[#5b1725] sm:px-8 sm:py-20 lg:px-14 lg:py-28">
       <section className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Contact</p>
-          <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
+          <h1 className="serif text-4xl font-bold leading-none text-[#5b1725] min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
             Tell us what you are building
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">

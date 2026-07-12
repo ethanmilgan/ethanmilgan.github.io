@@ -28,7 +28,7 @@ export default function SiteHeader() {
           ))}
           <Link
             aria-label="Account"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d8c1b4] bg-white text-[#2b2320] hover:border-[#b76a7a] hover:text-[#b76a7a]"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d8c1b4] bg-white text-[#5b1725] hover:border-[#b76a7a] hover:text-[#b76a7a]"
             href="/account"
             title="Account"
           >
@@ -43,7 +43,7 @@ export default function SiteHeader() {
           aria-controls="mobile-site-menu"
           aria-expanded={isOpen}
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#d8c1b4] bg-white text-[#2b2320] transition hover:border-[#b76a7a] hover:text-[#b76a7a] sm:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#d8c1b4] bg-white text-[#5b1725] transition hover:border-[#b76a7a] hover:text-[#b76a7a] sm:hidden"
           onClick={() => setIsOpen((current) => !current)}
           type="button"
         >
@@ -74,7 +74,7 @@ export default function SiteHeader() {
           <p className="serif text-2xl font-bold">styleeditbyreena</p>
           <button
             aria-label="Close navigation menu"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#d8c1b4] bg-white text-[#2b2320]"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#d8c1b4] bg-white text-[#5b1725]"
             onClick={() => setIsOpen(false)}
             type="button"
           >
@@ -85,7 +85,7 @@ export default function SiteHeader() {
           </button>
         </div>
 
-        <nav className="mt-8 grid gap-3 text-base font-black text-[#2b2320]" aria-label="Mobile navigation">
+        <nav className="mt-8 grid gap-3 text-base font-black text-[#5b1725]" aria-label="Mobile navigation">
           {navItems.map((item) => (
             <Link
               className="rounded-lg border border-[#d8c1b4] bg-white px-4 py-4 hover:border-[#b76a7a] hover:text-[#b76a7a]"

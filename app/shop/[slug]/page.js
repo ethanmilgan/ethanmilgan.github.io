@@ -35,7 +35,7 @@ export default async function ProductDetailPage({ params }) {
   }
 
   return (
-    <main className="bg-[#fff7f1] text-[#2b2320]">
+    <main className="bg-[#fff7f1] text-[#5b1725]">
       <section className="grid gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.95fr_1.05fr] lg:px-14 lg:py-28">
         <div className="relative min-h-105 overflow-hidden rounded-lg border border-[#d8c1b4] bg-[#f7e8df]">
           <Image

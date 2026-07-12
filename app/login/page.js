@@ -36,7 +36,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="bg-[#fff7f1] px-4 py-16 text-[#2b2320] sm:px-8 sm:py-20 lg:px-14 lg:py-28">
+    <main className="bg-[#fff7f1] px-4 py-16 text-[#5b1725] sm:px-8 sm:py-20 lg:px-14 lg:py-28">
       <section className="mx-auto max-w-xl rounded-lg border border-[#d8c1b4] bg-white p-6 shadow-[0_20px_60px_rgba(43,35,32,0.1)]">
         <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Account</p>
         <h1 className="serif text-4xl font-bold leading-none sm:text-5xl">Sign in</h1>

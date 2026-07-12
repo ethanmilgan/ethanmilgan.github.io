@@ -12,7 +12,7 @@ export default async function ShopPage() {
   const shopItems = await getProducts();
 
   return (
-    <main className="bg-[#fff7f1] text-[#2b2320]">
+    <main className="bg-[#fff7f1] text-[#5b1725]">
       <section className="relative overflow-hidden px-4 py-20 text-white sm:px-8 sm:py-24 lg:px-14 lg:py-32">
         <Image
           src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=82"

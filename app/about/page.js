@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="bg-[#fff7f1] text-[#2b2320]">
+    <main className="bg-[#fff7f1] text-[#5b1725]">
       <section className="grid gap-10 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28">
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">About Me</p>

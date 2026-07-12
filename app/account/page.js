@@ -29,7 +29,7 @@ export default async function AccountPage() {
   const orders = await getOrdersForUser(session.id);
 
   return (
-    <main className="bg-[#fff7f1] px-4 py-16 text-[#2b2320] sm:px-8 sm:py-20 lg:px-14 lg:py-28">
+    <main className="bg-[#fff7f1] px-4 py-16 text-[#5b1725] sm:px-8 sm:py-20 lg:px-14 lg:py-28">
       <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Account</p>

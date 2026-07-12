@@ -1,4 +1,5 @@
 import "./globals.css";
+import GlobalContactUsSection from "./components/GlobalContactUsSection";
 import SiteHeader from "./components/SiteHeader";
 
 export const metadata = {
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning>
         <SiteHeader />
         {children}
+        <GlobalContactUsSection />
       </body>
     </html>
   );
