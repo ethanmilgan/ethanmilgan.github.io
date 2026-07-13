@@ -20,9 +20,9 @@ export default function ContactUsSection() {
         </div>
         <a
           className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#b76a7a] px-5 py-3 text-sm font-black text-white min-[420px]:w-fit"
-          href="mailto:hello@example.com"
+          href="mailto:beingreena03@gmail.com"
         >
-          hello@example.com
+          beingreena03@gmail.com
         </a>
       </div>
     </section>
