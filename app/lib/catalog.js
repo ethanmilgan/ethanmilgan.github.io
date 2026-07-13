@@ -6,13 +6,25 @@ function bySortOrder(left, right) {
 }
 
 async function readMongoCollection(name, fallback) {
-  const db = await getMongoDb();
+  let db;
+
+  try {
+    db = await getMongoDb();
+  } catch {
+    return fallback;
+  }
 
   if (!db) {
     return fallback;
   }
 
-  const records = await db.collection(name).find({}).sort({ sortOrder: 1 }).toArray();
+  let records;
+
+  try {
+    records = await db.collection(name).find({}).sort({ sortOrder: 1 }).toArray();
+  } catch {
+    return fallback;
+  }
 
   return records.map(({ _id, ...record }) => record);
 }
@@ -28,7 +40,13 @@ export async function getProductBySlug(slug) {
 }
 
 export async function getProductWriteCollection() {
-  const db = await getMongoDb();
+  let db;
+
+  try {
+    db = await getMongoDb();
+  } catch {
+    return null;
+  }
 
   if (!db) {
     return null;

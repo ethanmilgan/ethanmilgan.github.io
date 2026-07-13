@@ -61,7 +61,13 @@ export function normalizeAssetForList(asset) {
 }
 
 export async function getImageAssetCollection() {
-  const db = await getMongoDb();
+  let db;
+
+  try {
+    db = await getMongoDb();
+  } catch {
+    return null;
+  }
 
   if (!db) {
     return null;
