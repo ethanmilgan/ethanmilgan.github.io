@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createImageAsset, deleteImageAsset, getImageAssets } from "@/app/lib/assets";
 import { getSessionFromRequest, isAdmin } from "@/app/lib/auth";
+import { cleanText, readJsonObject } from "@/app/lib/input-validation";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -54,7 +55,8 @@ export async function DELETE(request) {
     return NextResponse.json({ error: "Administrator access is required." }, { status: 403 });
   }
 
-  const { id } = await request.json();
+  const body = await readJsonObject(request);
+  const id = cleanText(body?.id, 24);
 
   if (!id) {
     return NextResponse.json({ error: "Image asset id is required." }, { status: 400 });

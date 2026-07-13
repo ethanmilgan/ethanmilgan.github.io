@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getLatestImageAssetBySection } from "@/app/lib/assets";
+import { removeTrailingHeadingPeriod } from "@/app/lib/text-format";
 
 export const metadata = {
   title: "About Reena | styleeditbyreena",
@@ -71,7 +72,7 @@ export default async function AboutPage() {
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">About Reena</p>
           <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
-            Personal styling rooted in confidence, ease, and real life.
+            Personal styling rooted in confidence, ease, and real life
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">
             Reena helps women build wardrobes that fit their lifestyle, their body, and the image they want to project so getting dressed feels simple again.
@@ -91,7 +92,7 @@ export default async function AboutPage() {
       <section className="grid gap-5 bg-[#2b2320] px-4 py-16 text-white sm:grid-cols-2 sm:px-8 lg:grid-cols-3 lg:px-14">
         {philosophyCards.map(([title, body]) => (
           <article className="rounded-lg border border-white/15 p-6" key={title}>
-            <h2 className="text-xl font-black">{title}</h2>
+            <h2 className="text-xl font-black">{removeTrailingHeadingPeriod(title)}</h2>
             <p className="mt-3 leading-7 text-white/72">{body}</p>
           </article>
         ))}
@@ -101,7 +102,7 @@ export default async function AboutPage() {
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Her Story</p>
           <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
-            A love for style that started at home.
+            A love for style that started at home
           </h2>
         </div>
         <div className="grid gap-5 text-base leading-8 text-[#6f5d55] sm:text-lg">
@@ -121,13 +122,13 @@ export default async function AboutPage() {
         <div className="mb-10 max-w-3xl">
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Frequently Asked Questions</p>
           <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
-            What working with Reena looks like.
+            What working with Reena looks like
           </h2>
         </div>
         <div className="grid gap-4 lg:grid-cols-2">
           {faqs.map(([question, answer]) => (
             <article className="rounded-lg border border-[#d8c1b4] bg-white p-5" key={question}>
-              <h3 className="text-lg font-black leading-tight">{question}</h3>
+              <h3 className="text-lg font-black leading-tight">{removeTrailingHeadingPeriod(question)}</h3>
               <p className="mt-3 leading-7 text-[#6f5d55]">{answer}</p>
             </article>
           ))}

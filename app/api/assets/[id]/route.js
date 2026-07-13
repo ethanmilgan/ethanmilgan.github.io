@@ -14,7 +14,9 @@ export async function GET(_request, { params }) {
   return new NextResponse(Buffer.from(asset.data, "base64"), {
     headers: {
       "Cache-Control": "public, max-age=31536000, immutable",
-      "Content-Type": asset.contentType
+      "Content-Security-Policy": "default-src 'none'; script-src 'none'; sandbox",
+      "Content-Type": asset.contentType,
+      "X-Content-Type-Options": "nosniff"
     }
   });
 }

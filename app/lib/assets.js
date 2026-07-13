@@ -1,7 +1,9 @@
 import { ObjectId } from "mongodb";
 import { getMongoDb } from "./mongodb";
+import { cleanText } from "./input-validation";
 
 const maxAssetBytes = 5 * 1024 * 1024;
+const allowedSections = new Set(["general", "slider", "featured", "shop", "about", "contact", "product"]);
 const imageTypeByExtension = {
   avif: "image/avif",
   bmp: "image/bmp",
@@ -41,8 +43,8 @@ export function getAssetUrl(id) {
 }
 
 export function normalizeSection(value) {
-  const section = String(value || "general").trim().toLowerCase();
-  return section || "general";
+  const section = cleanText(value || "general", 40).toLowerCase();
+  return allowedSections.has(section) ? section : "general";
 }
 
 export function normalizeAssetForList(asset) {
@@ -139,8 +141,8 @@ export async function createImageAsset({ file, altText, section }) {
 
   const bytes = Buffer.from(await file.arrayBuffer());
   const asset = {
-    filename: file.name || "uploaded-image",
-    altText: String(altText || "").trim(),
+    filename: cleanText(file.name || "uploaded-image", 180) || "uploaded-image",
+    altText: cleanText(altText, 180),
     contentType,
     size: file.size,
     section: normalizeSection(section),

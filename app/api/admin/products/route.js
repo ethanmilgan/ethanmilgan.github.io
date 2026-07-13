@@ -1,6 +1,14 @@
 import { NextResponse } from "next/server";
 import { getProductWriteCollection, getProducts } from "@/app/lib/catalog";
 import { getSessionFromRequest, isAdmin } from "@/app/lib/auth";
+import {
+  cleanBoolean,
+  cleanImageUrl,
+  cleanInteger,
+  cleanSlug,
+  cleanText,
+  readJsonObject
+} from "@/app/lib/input-validation";
 
 function slugify(value) {
   return value
@@ -21,14 +29,14 @@ function requireAdmin(request) {
 }
 
 function validateProduct(input) {
-  const title = String(input.title || "").trim();
-  const slug = String(input.slug || slugify(title)).trim();
-  const description = String(input.description || "").trim();
-  const category = String(input.category || "").trim();
-  const image = String(input.image || "").trim();
-  const pricingNote = String(input.pricingNote || "Please inquire directly for pricing.").trim();
-  const sortOrder = Number(input.sortOrder || 0);
-  const isFeatured = Boolean(input.isFeatured);
+  const title = cleanText(input.title, 120);
+  const slug = cleanSlug(input.slug || slugify(title));
+  const description = cleanText(input.description, 1200);
+  const category = cleanText(input.category, 80);
+  const image = cleanImageUrl(input.image);
+  const pricingNote = cleanText(input.pricingNote || "Please inquire directly for pricing.", 180);
+  const sortOrder = cleanInteger(input.sortOrder, 0);
+  const isFeatured = cleanBoolean(input.isFeatured);
 
   if (!title || !slug || !description || !category || !image || !pricingNote) {
     return null;
@@ -56,7 +64,13 @@ export async function POST(request) {
     return NextResponse.json({ error: "MongoDB is not configured. Set MONGODB_URI before editing products." }, { status: 503 });
   }
 
-  const product = validateProduct(await request.json());
+  const body = await readJsonObject(request);
+
+  if (!body) {
+    return NextResponse.json({ error: "Invalid product payload." }, { status: 400 });
+  }
+
+  const product = validateProduct(body);
 
   if (!product) {
     return NextResponse.json({ error: "Missing required product fields." }, { status: 400 });
@@ -77,7 +91,8 @@ export async function DELETE(request) {
     return NextResponse.json({ error: "MongoDB is not configured. Set MONGODB_URI before editing products." }, { status: 503 });
   }
 
-  const { slug } = await request.json();
+  const body = await readJsonObject(request);
+  const slug = cleanSlug(body?.slug);
 
   if (!slug) {
     return NextResponse.json({ error: "Product slug is required." }, { status: 400 });

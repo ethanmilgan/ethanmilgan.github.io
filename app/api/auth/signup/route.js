@@ -1,27 +1,19 @@
 import { NextResponse } from "next/server";
 import { createCustomerUser, setSessionCookie } from "@/app/lib/auth";
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+import { cleanDate, cleanEmail, cleanPassword, cleanText, readJsonObject } from "@/app/lib/input-validation";
 
 export async function POST(request) {
-  const {
-    firstName,
-    lastName,
-    dateOfBirth,
-    email,
-    phoneNumber,
-    password,
-    confirmPassword
-  } = await request.json();
+  const body = await readJsonObject(request);
+  const firstName = cleanText(body?.firstName, 80);
+  const lastName = cleanText(body?.lastName, 80);
+  const dateOfBirth = cleanDate(body?.dateOfBirth);
+  const email = cleanEmail(body?.email);
+  const phoneNumber = cleanText(body?.phoneNumber, 30);
+  const password = cleanPassword(body?.password);
+  const confirmPassword = cleanPassword(body?.confirmPassword);
 
   if (!firstName || !lastName || !dateOfBirth || !email || !phoneNumber || !password || !confirmPassword) {
     return NextResponse.json({ error: "All fields are required." }, { status: 400 });
-  }
-
-  if (!isValidEmail(email)) {
-    return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
   }
 
   if (password.length < 8) {
@@ -33,11 +25,11 @@ export async function POST(request) {
   }
 
   const result = await createCustomerUser({
-    firstName: firstName.trim(),
-    lastName: lastName.trim(),
+    firstName,
+    lastName,
     dateOfBirth,
-    email: email.trim(),
-    phoneNumber: phoneNumber.trim(),
+    email,
+    phoneNumber,
     password
   });
 

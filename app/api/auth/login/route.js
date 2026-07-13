@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import { findUserByEmail, setSessionCookie, verifyPassword } from "@/app/lib/auth";
+import { cleanEmail, cleanPassword, readJsonObject } from "@/app/lib/input-validation";
 
 export async function POST(request) {
-  const { email, password } = await request.json();
+  const body = await readJsonObject(request);
+  const email = cleanEmail(body?.email);
+  const password = cleanPassword(body?.password);
 
   if (!email || !password) {
     return NextResponse.json({ error: "Email and password are required." }, { status: 400 });

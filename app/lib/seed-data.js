@@ -74,7 +74,7 @@ export const seedProducts = [
 export const seedPageSlides = [
   {
     page: "About Me",
-    title: "Personal styling rooted in confidence, ease, and real life.",
+    title: "Personal styling rooted in confidence, ease, and real life",
     text: "Meet Reena, a stylist helping women build wardrobes that fit their lifestyle, body, budget, and confidence.",
     href: "/about",
     buttonLabel: "About Me",
@@ -83,7 +83,7 @@ export const seedPageSlides = [
   },
   {
     page: "Shop",
-    title: "Styling services for closets, photoshoots, travel, and everyday life.",
+    title: "Styling services for closets, photoshoots, travel, and everyday life",
     text: "Explore style consultations, closet edits, personal shopping, lookbooks, photoshoot styling, and event outfit planning.",
     href: "/shop",
     buttonLabel: "Shop",

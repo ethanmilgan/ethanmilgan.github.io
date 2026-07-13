@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProducts } from "@/app/lib/catalog";
+import { removeTrailingHeadingPeriod } from "@/app/lib/text-format";
 
 export const dynamic = "force-dynamic";
 
@@ -54,7 +55,7 @@ export default async function ProductDetailPage({ params }) {
           </Link>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{product.category}</p>
           <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl">
-            {product.title}
+            {removeTrailingHeadingPeriod(product.title)}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-[#6f5d55] sm:text-lg">
             {product.description}

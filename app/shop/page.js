@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getProducts } from "@/app/lib/catalog";
+import { removeTrailingHeadingPeriod } from "@/app/lib/text-format";
 
 export const metadata = {
   title: "Styling Services | styleeditbyreena",
@@ -28,7 +29,7 @@ export default async function ShopPage() {
         <div className="relative z-10 max-w-4xl">
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#f2cbd1]">Styling Services</p>
           <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
-            Wardrobe support for closets, photoshoots, travel, events, and everyday life.
+            Wardrobe support for closets, photoshoots, travel, events, and everyday life
           </h1>
         </div>
       </section>
@@ -41,7 +42,7 @@ export default async function ShopPage() {
             </div>
             <div className="p-4">
               <p className="text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{item.category}</p>
-              <h2 className="mt-2 text-lg font-black leading-tight">{item.title}</h2>
+              <h2 className="mt-2 text-lg font-black leading-tight">{removeTrailingHeadingPeriod(item.title)}</h2>
               <p className="mt-2 text-sm leading-6 text-[#6f5d55]">{item.description}</p>
             </div>
           </Link>

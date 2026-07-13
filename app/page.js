@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { removeTrailingHeadingPeriod } from "./lib/text-format";
 
 const categories = ["All", "Wardrobe", "Travel", "Photoshoot", "Closet Edit"];
 
@@ -50,7 +51,7 @@ const gettingStartedSteps = [
 const fallbackPageSlides = [
   {
     page: "About Me",
-    title: "Personal styling rooted in confidence, ease, and real life.",
+    title: "Personal styling rooted in confidence, ease, and real life",
     text: "Meet Reena, a stylist helping women build wardrobes that fit their lifestyle, body, budget, and confidence.",
     href: "/about",
     buttonLabel: "About Me",
@@ -58,7 +59,7 @@ const fallbackPageSlides = [
   },
   {
     page: "Shop",
-    title: "Styling services for closets, photoshoots, travel, and everyday life.",
+    title: "Styling services for closets, photoshoots, travel, and everyday life",
     text: "Explore style consultations, closet edits, personal shopping, lookbooks, photoshoot styling, and event outfit planning.",
     href: "/shop",
     buttonLabel: "Shop",
@@ -193,7 +194,7 @@ export default function Home() {
               {currentSlide.page}
             </p>
             <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
-              {currentSlide.title}
+              {removeTrailingHeadingPeriod(currentSlide.title)}
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-white/78 sm:text-lg sm:leading-8">
               {currentSlide.text}
@@ -249,7 +250,7 @@ export default function Home() {
           <div>
             <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Featured products</p>
             <h2 id="featured-products-title" className="serif max-w-3xl text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
-              Curated pieces Reena is highlighting now.
+              Curated pieces Reena is highlighting now
             </h2>
           </div>
           <Link className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-[#d8c1b4] bg-white px-5 py-3 text-sm font-black min-[420px]:w-fit" href="/shop">
@@ -266,7 +267,7 @@ export default function Home() {
                 </div>
                 <div className="p-4">
                   <p className="text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{product.category}</p>
-                  <h3 className="mt-2 text-lg font-black leading-tight">{product.title}</h3>
+                  <h3 className="mt-2 text-lg font-black leading-tight">{removeTrailingHeadingPeriod(product.title)}</h3>
                   <p className="mt-2 text-sm leading-6 text-[#6f5d55]">{product.description}</p>
                 </div>
               </Link>
@@ -286,7 +287,7 @@ export default function Home() {
         <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Journal</p>
-            <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">Wardrobe notes for real life.</h2>
+            <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">Wardrobe notes for real life</h2>
           </div>
           <div className="grid w-full grid-cols-2 gap-2 min-[520px]:flex min-[520px]:w-auto min-[520px]:flex-wrap">
             {categories.map((category) => (
@@ -316,7 +317,7 @@ export default function Home() {
                 <p className="text-xs font-black uppercase tracking-normal text-[#9f5f6f]">
                   {story.category} / {story.date}
                 </p>
-                <h3 className="mt-3 text-xl font-black leading-tight">{story.title}</h3>
+                <h3 className="mt-3 text-xl font-black leading-tight">{removeTrailingHeadingPeriod(story.title)}</h3>
                 <p className="mt-3 text-sm leading-6 text-[#6f5d55]">{story.summary}</p>
               </div>
             </article>
@@ -327,7 +328,7 @@ export default function Home() {
       <section id="studio" className="grid gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28">
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">How to get started</p>
-          <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">A simple path to a wardrobe that works.</h2>
+          <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">A simple path to a wardrobe that works</h2>
           <p className="mt-6 max-w-xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">
             Reena starts by learning how you live, what you need, and where getting dressed feels frustrating. From there, every recommendation is tailored to you.
           </p>
