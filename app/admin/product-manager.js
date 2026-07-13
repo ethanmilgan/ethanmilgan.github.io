@@ -14,6 +14,102 @@ const emptyProduct = {
 };
 
 const assetSections = ["general", "slider", "featured", "shop", "about", "contact", "product"];
+const uploadMaxBytes = 4 * 1024 * 1024;
+const uploadMaxDimension = 1800;
+const compressibleImageTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+const passthroughImageTypes = new Set(["image/gif", "image/svg+xml", "image/x-icon", "image/vnd.microsoft.icon"]);
+const imageFilenamePattern = /\.(avif|bmp|gif|heic|heif|ico|jfif|jpe?g|png|svg|tiff?|webp)$/i;
+
+function formatBytes(bytes) {
+  if (!bytes) {
+    return "0 B";
+  }
+
+  const units = ["B", "KB", "MB"];
+  const unitIndex = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+  const value = bytes / 1024 ** unitIndex;
+  return `${value.toFixed(unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
+}
+
+function loadImage(file) {
+  return new Promise((resolve, reject) => {
+    const imageUrl = URL.createObjectURL(file);
+    const image = new Image();
+
+    image.onload = () => {
+      URL.revokeObjectURL(imageUrl);
+      resolve(image);
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(imageUrl);
+      reject(new Error("This image format could not be read. If it is HEIC, export it as JPEG first."));
+    };
+
+    image.src = imageUrl;
+  });
+}
+
+function canvasToBlob(canvas, type, quality) {
+  return new Promise((resolve) => {
+    canvas.toBlob(resolve, type, quality);
+  });
+}
+
+async function prepareImageForUpload(file) {
+  if (!file) {
+    throw new Error("Choose an image file to upload.");
+  }
+
+  const isImage = file.type.startsWith("image/") || imageFilenamePattern.test(file.name);
+
+  if (!isImage) {
+    throw new Error("Choose an image file.");
+  }
+
+  if (passthroughImageTypes.has(file.type)) {
+    if (file.size > uploadMaxBytes) {
+      throw new Error(`This image format must be ${formatBytes(uploadMaxBytes)} or smaller.`);
+    }
+
+    return file;
+  }
+
+  let image;
+
+  try {
+    image = await loadImage(file);
+  } catch (error) {
+    if (file.size <= uploadMaxBytes) {
+      return file;
+    }
+
+    throw new Error(`${error.message} Choose a file under ${formatBytes(uploadMaxBytes)} or convert it to JPEG, PNG, or WebP.`);
+  }
+
+  const scale = Math.min(1, uploadMaxDimension / Math.max(image.naturalWidth, image.naturalHeight));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+  canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+
+  const context = canvas.getContext("2d");
+  context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+  for (const quality of compressibleImageTypes.has(file.type) ? [0.86, 0.76, 0.66] : [0.9, 0.78, 0.66]) {
+    const blob = await canvasToBlob(canvas, "image/jpeg", quality);
+
+    if (blob && blob.size <= uploadMaxBytes) {
+      const filename = file.name.replace(/\.[^.]+$/, "") || "uploaded-image";
+      return new File([blob], `${filename}.jpg`, { type: "image/jpeg" });
+    }
+  }
+
+  if (file.size <= uploadMaxBytes) {
+    return file;
+  }
+
+  throw new Error(`Image is still too large after resizing. Choose an image under ${formatBytes(uploadMaxBytes)}.`);
+}
 
 export default function AdminProductManager({ initialAssets, initialProducts }) {
   const [assets, setAssets] = useState(initialAssets);
@@ -96,32 +192,50 @@ export default function AdminProductManager({ initialAssets, initialProducts }) 
 
   async function uploadAsset(event) {
     event.preventDefault();
-    setAssetMessage("");
+    setAssetMessage("Preparing image...");
+
+    let uploadFile;
+
+    try {
+      uploadFile = await prepareImageForUpload(assetForm.file);
+    } catch (error) {
+      setAssetMessage(error.message);
+      return;
+    }
 
     const body = new FormData();
     body.append("altText", assetForm.altText);
     body.append("section", assetForm.section);
+    body.append("file", uploadFile);
 
-    if (assetForm.file) {
-      body.append("file", assetForm.file);
+    try {
+      setAssetMessage("Uploading image...");
+
+      const response = await fetch("/api/admin/assets", {
+        method: "POST",
+        body
+      });
+
+      let result = {};
+
+      try {
+        result = await response.json();
+      } catch {
+        result = {};
+      }
+
+      if (!response.ok) {
+        setAssetMessage(result.error || "Unable to upload image. Try a smaller JPEG or PNG file.");
+        return;
+      }
+
+      setAssetForm({ altText: "", section: "product", file: null });
+      setAssetMessage("Image uploaded.");
+      updateField("image", result.asset.url);
+      await refreshAssets();
+    } catch {
+      setAssetMessage("Upload failed. Check that you are signed in as admin and try again.");
     }
-
-    const response = await fetch("/api/admin/assets", {
-      method: "POST",
-      body
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      setAssetMessage(result.error || "Unable to upload image.");
-      return;
-    }
-
-    setAssetForm({ altText: "", section: "product", file: null });
-    setAssetMessage("Image uploaded.");
-    updateField("image", result.asset.url);
-    await refreshAssets();
   }
 
   async function deleteAsset(id) {
@@ -191,9 +305,13 @@ export default function AdminProductManager({ initialAssets, initialProducts }) 
               <label className="grid gap-2 text-sm font-black">
                 Image file
                 <input
-                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  accept="image/*"
                   className="rounded-lg border border-[#d8c1b4] bg-[#fff7f1] px-4 py-3 font-normal"
-                  onChange={(event) => setAssetForm((current) => ({ ...current, file: event.target.files?.[0] || null }))}
+                  onChange={(event) => {
+                    const file = event.target.files?.[0] || null;
+                    setAssetForm((current) => ({ ...current, file }));
+                    setAssetMessage(file ? `Selected ${file.name} (${formatBytes(file.size)}).` : "");
+                  }}
                   type="file"
                 />
               </label>

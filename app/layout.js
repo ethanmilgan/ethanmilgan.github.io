@@ -4,9 +4,9 @@ import GlobalContactUsSection from "./components/GlobalContactUsSection";
 import SiteHeader from "./components/SiteHeader";
 
 export const metadata = {
-  title: "styleeditbyreena | Fashion Journal & Portfolio",
+  title: "styleeditbyreena | Personal Styling by Reena",
   description:
-    "A reactive fashion blog and portfolio built with Next.js, React, and Tailwind CSS."
+    "Personal styling, closet edits, shopping, photoshoot styling, and wardrobe support for women who want getting dressed to feel easy."
 };
 
 export default function RootLayout({ children }) {

@@ -15,7 +15,7 @@ export default function ContactUsSection() {
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#f2cbd1]">Contact us</p>
           <h2 className="serif max-w-4xl text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
-            Ready for a fashion site that feels as considered as the collection?
+            Ready to make getting dressed feel simple again?
           </h2>
         </div>
         <a

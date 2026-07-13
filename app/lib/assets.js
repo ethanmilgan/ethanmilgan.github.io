@@ -2,7 +2,39 @@ import { ObjectId } from "mongodb";
 import { getMongoDb } from "./mongodb";
 
 const maxAssetBytes = 5 * 1024 * 1024;
-const allowedImageTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+const imageTypeByExtension = {
+  avif: "image/avif",
+  bmp: "image/bmp",
+  gif: "image/gif",
+  heic: "image/heic",
+  heif: "image/heif",
+  ico: "image/x-icon",
+  jfif: "image/jpeg",
+  jpeg: "image/jpeg",
+  jpg: "image/jpeg",
+  png: "image/png",
+  svg: "image/svg+xml",
+  tif: "image/tiff",
+  tiff: "image/tiff",
+  webp: "image/webp"
+};
+
+function getImageContentType(file) {
+  if (file.type?.startsWith("image/")) {
+    return file.type;
+  }
+
+  const extension = String(file.name || "").split(".").pop()?.toLowerCase();
+  return imageTypeByExtension[extension] || "";
+}
+
+function isImageFile(file, contentType) {
+  if (contentType.startsWith("image/")) {
+    return true;
+  }
+
+  return Boolean(imageTypeByExtension[String(file.name || "").split(".").pop()?.toLowerCase()]);
+}
 
 export function getAssetUrl(id) {
   return `/api/assets/${id}`;
@@ -49,6 +81,21 @@ export async function getImageAssets() {
   return assets.map(normalizeAssetForList);
 }
 
+export async function getLatestImageAssetBySection(section) {
+  const collection = await getImageAssetCollection();
+
+  if (!collection) {
+    return null;
+  }
+
+  const asset = await collection.findOne(
+    { section: normalizeSection(section) },
+    { sort: { createdAt: -1 } }
+  );
+
+  return asset ? normalizeAssetForList(asset) : null;
+}
+
 export async function getImageAssetById(id) {
   if (!ObjectId.isValid(id)) {
     return null;
@@ -68,8 +115,10 @@ export async function createImageAsset({ file, altText, section }) {
     return { error: "Choose an image file to upload." };
   }
 
-  if (!allowedImageTypes.has(file.type)) {
-    return { error: "Only JPEG, PNG, WebP, and GIF images can be uploaded." };
+  const contentType = getImageContentType(file);
+
+  if (!contentType || !isImageFile(file, contentType)) {
+    return { error: "Only image files can be uploaded." };
   }
 
   if (file.size > maxAssetBytes) {
@@ -86,7 +135,7 @@ export async function createImageAsset({ file, altText, section }) {
   const asset = {
     filename: file.name || "uploaded-image",
     altText: String(altText || "").trim(),
-    contentType: file.type,
+    contentType,
     size: file.size,
     section: normalizeSection(section),
     data: bytes.toString("base64"),

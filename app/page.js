@@ -4,70 +4,70 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-const categories = ["All", "Runway", "Streetwear", "Editorial", "Retail"];
+const categories = ["All", "Wardrobe", "Travel", "Photoshoot", "Closet Edit"];
 
 const stories = [
   {
-    title: "Sheer layers and steel-gray tailoring lead the season",
-    category: "Runway",
-    date: "June 2026",
+    title: "Why a smaller wardrobe can make getting dressed easier",
+    category: "Wardrobe",
+    date: "Wardrobe Notes",
     image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=82",
     summary:
-      "A trend report on transparent textures, sharp shoulders, and restrained metallic accents moving from showrooms into capsules."
+      "Reena believes most women do not need more clothes. They need the right pieces that fit well and work for real life."
   },
   {
-    title: "How to style a five-piece travel wardrobe",
-    category: "Streetwear",
-    date: "Field Notes",
+    title: "How to make travel outfits feel polished without overpacking",
+    category: "Travel",
+    date: "Travel",
     image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=82",
     summary:
-      "A practical edit for city breaks: one statement coat, two bases, one texture piece, and footwear that works after dark."
+      "Build a mix-and-match travel wardrobe around pieces that move from daytime plans to dinner without stress."
   },
   {
-    title: "Building campaign pages that make garments feel tactile",
-    category: "Editorial",
+    title: "What to wear for a branding photoshoot",
+    category: "Photoshoot",
     date: "Studio",
     image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=82",
     summary:
-      "Composition, crop ratios, image sequencing, and product copy patterns for fashion portfolios and digital lookbooks."
+      "Photoshoot styling should reflect your brand, photograph beautifully, and give you enough variety for a full gallery."
   },
   {
-    title: "What a boutique needs before adding checkout",
+    title: "Closet edits that start with what you already own",
     category: "Retail",
-    date: "Guide",
+    date: "Closet Edit",
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=82",
     summary:
-      "A phased plan for product discovery, wishlist behavior, sizing filters, payments, image optimization, and maintenance."
+      "Before shopping for anything new, Reena helps clients identify what works, what is missing, and what no longer serves them."
   }
 ];
 
-const tiers = {
-  Portfolio: "$1,000-$5,000",
-  Boutique: "$5,000-$20,000",
-  Platform: "$20,000-$100,000+"
-};
+const gettingStartedSteps = [
+  ["Book a Consultation", "Talk through your goals, lifestyle, budget, and what is not working in your wardrobe right now."],
+  ["Create Your Plan", "Get a personalized styling experience built around your body, schedule, events, and everyday needs."],
+  ["Love Your Wardrobe", "Walk away with outfits that make getting dressed simple, polished, and enjoyable every day."]
+];
 
 const fallbackPageSlides = [
   {
     page: "About Me",
-    title: "Fashion direction with a digital-first point of view.",
-    text: "Meet styleeditbyreena, a fashion journal and creative studio for boutiques, stylists, emerging labels, and editorial teams.",
+    title: "Personal styling rooted in confidence, ease, and real life.",
+    text: "Meet Reena, a stylist helping women build wardrobes that fit their lifestyle, body, budget, and confidence.",
     href: "/about",
     buttonLabel: "About Me",
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=82"
   },
   {
     page: "Shop",
-    title: "Curated fashion edits built around strong seasonal stories.",
-    text: "Explore capsule lookbooks, resort edits, buyer previews, and studio essentials shaped for modern fashion presentation.",
+    title: "Styling services for closets, photoshoots, travel, and everyday life.",
+    text: "Explore style consultations, closet edits, personal shopping, lookbooks, photoshoot styling, and event outfit planning.",
     href: "/shop",
     buttonLabel: "Shop",
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=82"
   },
   {
     page: "Contact",
-    title: "Start a portfolio, product, or editorial website conversation.",
-    text: "Reach out for fashion site planning, collection pages, journal strategy, boutique commerce paths, or campaign storytelling.",
+    title: "Ready to make getting dressed feel simple again?",
+    text: "Book a consultation for wardrobe support that is tailored to your lifestyle, goals, budget, and personal style.",
     href: "/contact",
     buttonLabel: "Contact",
     image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=82"
@@ -101,8 +101,6 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [pageSlides, setPageSlides] = useState(fallbackPageSlides);
   const [products, setProducts] = useState(fallbackProducts);
-  const [siteType, setSiteType] = useState("Portfolio");
-  const [commerce, setCommerce] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
 
   const filteredStories = useMemo(() => {
@@ -113,7 +111,6 @@ export default function Home() {
     return stories.filter((story) => story.category === activeCategory);
   }, [activeCategory]);
 
-  const estimate = commerce && siteType === "Portfolio" ? "$5,000-$20,000" : tiers[siteType];
   const currentSlide = pageSlides[activeSlide];
   const featuredProducts = products.filter((product) => product.isFeatured).slice(0, 4);
 
@@ -133,7 +130,13 @@ export default function Home() {
     let isMounted = true;
 
     async function loadCatalog() {
-      const response = await fetch("/api/catalog");
+      let response;
+
+      try {
+        response = await fetch("/api/catalog");
+      } catch {
+        return;
+      }
 
       if (!response.ok) {
         return;
@@ -155,9 +158,7 @@ export default function Home() {
       }
     }
 
-    loadCatalog().catch((error) => {
-      console.error("Unable to load catalog data", error);
-    });
+    loadCatalog();
 
     return () => {
       isMounted = false;
@@ -285,7 +286,7 @@ export default function Home() {
         <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Journal</p>
-            <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">Fashion-first publishing.</h2>
+            <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">Wardrobe notes for real life.</h2>
           </div>
           <div className="grid w-full grid-cols-2 gap-2 min-[520px]:flex min-[520px]:w-auto min-[520px]:flex-wrap">
             {categories.map((category) => (
@@ -325,49 +326,22 @@ export default function Home() {
 
       <section id="studio" className="grid gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28">
         <div>
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Interactive planner</p>
-          <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">Plan the right fashion website phase.</h2>
+          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">How to get started</p>
+          <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">A simple path to a wardrobe that works.</h2>
           <p className="mt-6 max-w-xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">
-            The guide recommends matching cost and technology to complexity. Use this lightweight planner to
-            pick the right starting point before adding payments, advanced search, or account features.
+            Reena starts by learning how you live, what you need, and where getting dressed feels frustrating. From there, every recommendation is tailored to you.
           </p>
         </div>
 
         <div className="rounded-lg border border-[#d8c1b4] bg-white p-5 shadow-[0_20px_60px_rgba(43,35,32,0.1)] sm:p-6">
-          <div className="grid gap-3 min-[520px]:grid-cols-3">
-            {Object.keys(tiers).map((type) => (
-              <button
-                className={`rounded-lg border px-4 py-4 text-left font-black ${
-                  siteType === type
-                    ? "border-[#b76a7a] bg-[#b76a7a] text-white"
-                    : "border-[#d8c1b4] bg-[#fff7f1] text-[#5b1725]"
-                }`}
-                key={type}
-                onClick={() => setSiteType(type)}
-                type="button"
-              >
-                {type}
-              </button>
+          <div className="grid gap-4">
+            {gettingStartedSteps.map(([title, body], index) => (
+              <article className="rounded-lg border border-[#d8c1b4] bg-[#fff7f1] p-5" key={title}>
+                <p className="text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Step {index + 1}</p>
+                <h3 className="mt-2 text-xl font-black">{title}</h3>
+                <p className="mt-3 leading-7 text-[#6f5d55]">{body}</p>
+              </article>
             ))}
-          </div>
-
-          <label className="mt-6 flex cursor-pointer items-center justify-between gap-4 rounded-lg bg-[#f7e8df] p-4 text-sm font-black">
-            Add e-commerce checkout path
-            <input
-              checked={commerce}
-              className="h-5 w-5 accent-[#b76a7a]"
-              onChange={(event) => setCommerce(event.target.checked)}
-              type="checkbox"
-            />
-          </label>
-
-          <div className="mt-6 rounded-lg bg-[#2b2320] p-6 text-white">
-            <p className="text-xs font-black uppercase tracking-normal text-[#f2cbd1]">Estimated build range</p>
-            <p className="serif mt-2 text-4xl font-bold sm:text-5xl">{estimate}</p>
-            <p className="mt-4 leading-7 text-white/75">
-              Suggested stack: Next.js and React for the interface, Tailwind CSS for styling,
-              Cloudinary-style image optimization, and Shopify or WooCommerce when selling starts.
-            </p>
           </div>
         </div>
       </section>

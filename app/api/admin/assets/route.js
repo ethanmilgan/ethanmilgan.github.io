@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { createImageAsset, deleteImageAsset, getImageAssets } from "@/app/lib/assets";
 import { getSessionFromRequest, isAdmin } from "@/app/lib/auth";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 function requireAdmin(request) {
   const session = getSessionFromRequest(request);
 
@@ -25,7 +28,14 @@ export async function POST(request) {
     return NextResponse.json({ error: "Administrator access is required." }, { status: 403 });
   }
 
-  const formData = await request.formData();
+  let formData;
+
+  try {
+    formData = await request.formData();
+  } catch {
+    return NextResponse.json({ error: "Unable to read upload. Try a smaller JPEG or PNG file." }, { status: 400 });
+  }
+
   const result = await createImageAsset({
     file: formData.get("file"),
     altText: formData.get("altText"),

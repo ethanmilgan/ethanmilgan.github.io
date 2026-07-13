@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -12,6 +12,53 @@ const navItems = [
 
 export default function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
+  const [accountHref, setAccountHref] = useState("/account");
+  const [accountLabel, setAccountLabel] = useState("Account");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadSession() {
+      let response;
+
+      try {
+        response = await fetch("/api/auth/me");
+      } catch {
+        return;
+      }
+
+      if (!response.ok) {
+        return;
+      }
+
+      const result = await response.json();
+
+      if (!isMounted) {
+        return;
+      }
+
+      if (result.user?.role === "admin") {
+        setAccountHref("/admin");
+        setAccountLabel("CMS");
+        return;
+      }
+
+      if (result.user) {
+        setAccountHref("/account");
+        setAccountLabel("Account");
+        return;
+      }
+
+      setAccountHref("/login");
+      setAccountLabel("Sign in");
+    }
+
+    loadSession();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#d8c1b4]/80 bg-[#fff7f1]/92 px-4 py-4 backdrop-blur-md sm:px-8 lg:px-14">
@@ -27,10 +74,10 @@ export default function SiteHeader() {
             </Link>
           ))}
           <Link
-            aria-label="Account"
+            aria-label={accountLabel}
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d8c1b4] bg-white text-[#5b1725] hover:border-[#b76a7a] hover:text-[#b76a7a]"
-            href="/account"
-            title="Account"
+            href={accountHref}
+            title={accountLabel}
           >
             <span className="relative h-5 w-5" aria-hidden="true">
               <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full border-2 border-current" />
@@ -98,10 +145,10 @@ export default function SiteHeader() {
           ))}
           <Link
             className="flex items-center justify-between rounded-lg border border-[#d8c1b4] bg-white px-4 py-4 hover:border-[#b76a7a] hover:text-[#b76a7a]"
-            href="/account"
+            href={accountHref}
             onClick={() => setIsOpen(false)}
           >
-            Account
+            {accountLabel}
             <span className="relative h-5 w-5" aria-hidden="true">
               <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full border-2 border-current" />
               <span className="absolute bottom-0 left-1/2 h-2.5 w-4 -translate-x-1/2 rounded-t-full border-2 border-current border-b-0" />

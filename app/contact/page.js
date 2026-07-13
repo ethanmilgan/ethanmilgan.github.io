@@ -1,5 +1,7 @@
 export const metadata = {
-  title: "Contact | styleeditbyreena"
+  title: "Contact | styleeditbyreena",
+  description:
+    "Book a styling consultation with Reena for closet edits, personal shopping, branding photoshoots, event styling, and wardrobe support."
 };
 
 export default function ContactPage() {
@@ -9,10 +11,10 @@ export default function ContactPage() {
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Contact</p>
           <h1 className="serif text-4xl font-bold leading-none text-[#5b1725] min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
-            Tell us what you are building
+            Book a styling consultation
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">
-            Reach out for fashion portfolio sites, blog strategy, collection pages, or boutique commerce planning.
+            Reach out for closet edits, personal shopping, branding photoshoot styling, event looks, or help making your wardrobe feel easy again.
           </p>
           <a className="mt-8 inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#b76a7a] px-5 py-3 text-sm font-black text-white min-[420px]:w-fit" href="mailto:hello@example.com">
             hello@example.com
@@ -30,8 +32,8 @@ export default function ContactPage() {
               <input className="rounded-lg border border-[#d8c1b4] bg-[#fff7f1] px-4 py-3 font-normal" placeholder="you@example.com" type="email" />
             </label>
             <label className="grid gap-2 text-sm font-black">
-              Project
-              <textarea className="min-h-40 rounded-lg border border-[#d8c1b4] bg-[#fff7f1] px-4 py-3 font-normal" placeholder="Portfolio, blog, shop, or commerce needs" />
+              Styling goals
+              <textarea className="min-h-40 rounded-lg border border-[#d8c1b4] bg-[#fff7f1] px-4 py-3 font-normal" placeholder="Closet edit, personal shopping, photoshoot, event, travel, or everyday wardrobe support" />
             </label>
             <button className="rounded-lg bg-[#2b2320] px-5 py-3 text-sm font-black text-white" type="button">
               Send Inquiry

@@ -3,7 +3,9 @@ import Link from "next/link";
 import { getProducts } from "@/app/lib/catalog";
 
 export const metadata = {
-  title: "Shop | styleeditbyreena"
+  title: "Styling Services | styleeditbyreena",
+  description:
+    "Explore Reena's styling services, including consultations, closet edits, personal shopping, photoshoot styling, and event outfit planning."
 };
 
 export const dynamic = "force-dynamic";
@@ -24,9 +26,9 @@ export default async function ShopPage() {
         />
         <div className="absolute inset-0 bg-[#2b2320]/76" />
         <div className="relative z-10 max-w-4xl">
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#f2cbd1]">Shop</p>
+          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#f2cbd1]">Styling Services</p>
           <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
-            Fashion products and curated edits with a point of view.
+            Wardrobe support for closets, photoshoots, travel, events, and everyday life.
           </h1>
         </div>
       </section>
