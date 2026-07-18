@@ -4,7 +4,6 @@ import { getSessionFromRequest, isAdmin } from "@/app/lib/auth";
 import {
   cleanBoolean,
   cleanImageUrl,
-  cleanInteger,
   cleanSlug,
   cleanText,
   readJsonObject
@@ -35,14 +34,13 @@ function validateProduct(input) {
   const category = cleanText(input.category, 80);
   const image = cleanImageUrl(input.image);
   const pricingNote = cleanText(input.pricingNote || "Please inquire directly for pricing.", 180);
-  const sortOrder = cleanInteger(input.sortOrder, 0);
   const isFeatured = cleanBoolean(input.isFeatured);
 
   if (!title || !slug || !description || !category || !image || !pricingNote) {
     return null;
   }
 
-  return { title, slug, description, category, image, pricingNote, sortOrder, isFeatured };
+  return { title, slug, description, category, image, pricingNote, isFeatured };
 }
 
 export async function GET(request) {
@@ -76,7 +74,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "Missing required product fields." }, { status: 400 });
   }
 
-  await collection.updateOne({ slug: product.slug }, { $set: product, $unset: { price: "" } }, { upsert: true });
+  await collection.updateOne({ slug: product.slug }, { $set: product, $unset: { price: "", sortOrder: "" } }, { upsert: true });
   return NextResponse.json({ product });
 }
 

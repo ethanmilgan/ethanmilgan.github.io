@@ -5,7 +5,11 @@ function bySortOrder(left, right) {
   return (left.sortOrder || 0) - (right.sortOrder || 0);
 }
 
-async function readMongoCollection(name, fallback) {
+function byTitle(left, right) {
+  return String(left.title || "").localeCompare(String(right.title || ""));
+}
+
+async function readMongoCollection(name, fallback, sort = {}) {
   let db;
 
   try {
@@ -21,7 +25,7 @@ async function readMongoCollection(name, fallback) {
   let records;
 
   try {
-    records = await db.collection(name).find({}).sort({ sortOrder: 1 }).toArray();
+    records = await db.collection(name).find({}).sort(sort).toArray();
   } catch {
     return fallback;
   }
@@ -30,8 +34,8 @@ async function readMongoCollection(name, fallback) {
 }
 
 export async function getProducts() {
-  const products = await readMongoCollection("products", seedProducts);
-  return products.sort(bySortOrder);
+  const products = await readMongoCollection("products", seedProducts, { title: 1 });
+  return products.sort(byTitle);
 }
 
 export async function getProductBySlug(slug) {
@@ -56,6 +60,6 @@ export async function getProductWriteCollection() {
 }
 
 export async function getPageSlides() {
-  const pageSlides = await readMongoCollection("pageSlides", seedPageSlides);
+  const pageSlides = await readMongoCollection("pageSlides", seedPageSlides, { sortOrder: 1 });
   return pageSlides.sort(bySortOrder);
 }

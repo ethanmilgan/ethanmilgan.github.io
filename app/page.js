@@ -48,6 +48,20 @@ const gettingStartedSteps = [
   ["Love Your Wardrobe", "Walk away with outfits that make getting dressed simple, polished, and enjoyable every day."]
 ];
 
+const fallbackPageContent = {
+  featuredEyebrow: "Featured products",
+  featuredTitle: "Curated pieces Reena is highlighting now",
+  journalEyebrow: "Journal",
+  journalTitle: "Wardrobe notes for real life",
+  gettingStartedEyebrow: "How to get started",
+  gettingStartedTitle: "A simple path to a wardrobe that works",
+  gettingStartedText:
+    "Reena starts by learning how you live, what you need, and where getting dressed feels frustrating. From there, every recommendation is tailored to you.",
+  aboutSlideImage: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=82",
+  servicesSlideImage: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=82",
+  contactSlideImage: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=82"
+};
+
 const fallbackPageSlides = [
   {
     page: "About Me",
@@ -58,11 +72,11 @@ const fallbackPageSlides = [
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=82"
   },
   {
-    page: "Shop",
+    page: "Services",
     title: "Styling services for closets, photoshoots, travel, and everyday life",
     text: "Explore style consultations, closet edits, personal shopping, lookbooks, photoshoot styling, and event outfit planning.",
-    href: "/shop",
-    buttonLabel: "Shop",
+    href: "/services",
+    buttonLabel: "Services",
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=82"
   },
   {
@@ -83,7 +97,6 @@ const fallbackProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 1,
     isFeatured: true
   },
   {
@@ -93,7 +106,6 @@ const fallbackProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 2,
     isFeatured: true
   }
 ];
@@ -102,6 +114,7 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [pageSlides, setPageSlides] = useState(fallbackPageSlides);
   const [products, setProducts] = useState(fallbackProducts);
+  const [pageContent, setPageContent] = useState(fallbackPageContent);
   const [activeSlide, setActiveSlide] = useState(0);
 
   const filteredStories = useMemo(() => {
@@ -156,6 +169,10 @@ export default function Home() {
 
       if (catalog.products?.length) {
         setProducts(catalog.products);
+      }
+
+      if (catalog.pageContent) {
+        setPageContent((current) => ({ ...current, ...catalog.pageContent }));
       }
     }
 
@@ -248,20 +265,20 @@ export default function Home() {
       <section className="px-4 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-24" aria-labelledby="featured-products-title">
         <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Featured products</p>
+            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{pageContent.featuredEyebrow}</p>
             <h2 id="featured-products-title" className="serif max-w-3xl text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
-              Curated pieces Reena is highlighting now
+              {removeTrailingHeadingPeriod(pageContent.featuredTitle)}
             </h2>
           </div>
-          <Link className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-[#d8c1b4] bg-white px-5 py-3 text-sm font-black min-[420px]:w-fit" href="/shop">
-            Shop all
+          <Link className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-[#d8c1b4] bg-white px-5 py-3 text-sm font-black min-[420px]:w-fit" href="/services">
+            View all services
           </Link>
         </div>
 
         {featuredProducts.length ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {featuredProducts.map((product) => (
-              <Link className="block overflow-hidden rounded-lg border border-[#d8c1b4] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(43,35,32,0.12)]" href={`/shop/${product.slug}`} key={product.slug}>
+              <Link className="block overflow-hidden rounded-lg border border-[#d8c1b4] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(43,35,32,0.12)]" href={`/services/${product.slug}`} key={product.slug}>
                 <div className="relative aspect-5/6">
                   <Image src={product.image} alt={product.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                 </div>
@@ -286,8 +303,8 @@ export default function Home() {
       <section id="journal" className="bg-[#f7e8df] px-4 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-28">
         <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Journal</p>
-            <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">Wardrobe notes for real life</h2>
+            <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{pageContent.journalEyebrow}</p>
+            <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">{removeTrailingHeadingPeriod(pageContent.journalTitle)}</h2>
           </div>
           <div className="grid w-full grid-cols-2 gap-2 min-[520px]:flex min-[520px]:w-auto min-[520px]:flex-wrap">
             {categories.map((category) => (
@@ -327,10 +344,10 @@ export default function Home() {
 
       <section id="studio" className="grid gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28">
         <div>
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">How to get started</p>
-          <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">A simple path to a wardrobe that works</h2>
+          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{pageContent.gettingStartedEyebrow}</p>
+          <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">{removeTrailingHeadingPeriod(pageContent.gettingStartedTitle)}</h2>
           <p className="mt-6 max-w-xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">
-            Reena starts by learning how you live, what you need, and where getting dressed feels frustrating. From there, every recommendation is tailored to you.
+            {pageContent.gettingStartedText}
           </p>
         </div>
 

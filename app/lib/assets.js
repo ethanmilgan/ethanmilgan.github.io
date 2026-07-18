@@ -3,7 +3,7 @@ import { getMongoDb } from "./mongodb";
 import { cleanText } from "./input-validation";
 
 const maxAssetBytes = 5 * 1024 * 1024;
-const allowedSections = new Set(["general", "slider", "featured", "shop", "about", "contact", "product"]);
+const allowedSections = new Set(["general", "slider", "featured", "services", "shop", "about", "contact", "product"]);
 const imageTypeByExtension = {
   avif: "image/avif",
   bmp: "image/bmp",

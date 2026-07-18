@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getLatestImageAssetBySection } from "@/app/lib/assets";
+import { getPageContent } from "@/app/lib/page-content";
 import { removeTrailingHeadingPeriod } from "@/app/lib/text-format";
 
 export const metadata = {
@@ -61,21 +62,22 @@ const faqs = [
 export const dynamic = "force-dynamic";
 
 export default async function AboutPage() {
+  const content = await getPageContent("about");
   const aboutImage = await getLatestImageAssetBySection("about");
   const aboutImageSrc =
-    aboutImage?.url || "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=82";
+    content.heroImage || aboutImage?.url || "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=82";
   const aboutImageAlt = aboutImage?.altText || "Reena personal stylist portrait";
 
   return (
     <main className="bg-[#fff7f1] text-[#5b1725]">
       <section className="grid gap-10 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-14 lg:py-28">
         <div>
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">About Reena</p>
+          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{content.heroEyebrow}</p>
           <h1 className="serif text-4xl font-bold leading-none min-[420px]:text-5xl sm:text-6xl lg:text-7xl">
-            Personal styling rooted in confidence, ease, and real life
+            {removeTrailingHeadingPeriod(content.heroTitle)}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-[#6f5d55] sm:text-lg sm:leading-8">
-            Reena helps women build wardrobes that fit their lifestyle, their body, and the image they want to project so getting dressed feels simple again.
+            {content.heroText}
           </p>
         </div>
         <div className="relative min-h-80 overflow-hidden rounded-lg sm:min-h-130">
@@ -100,29 +102,23 @@ export default async function AboutPage() {
 
       <section className="grid gap-10 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-14 lg:py-28">
         <div>
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Her Story</p>
+          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{content.storyEyebrow}</p>
           <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
-            A love for style that started at home
+            {removeTrailingHeadingPeriod(content.storyTitle)}
           </h2>
         </div>
         <div className="grid gap-5 text-base leading-8 text-[#6f5d55] sm:text-lg">
-          <p>
-            Looking back, Reena's love for style started at home. Her dad always encouraged her family to take pride in the way they presented themselves. It was never about designer labels or having the biggest wardrobe. It was about looking put together, feeling confident, and respecting yourself and the people around you.
-          </p>
-          <p>
-            Before becoming a style consultant, Reena spent several years working in Corporate America. She genuinely looked forward to getting dressed for work and soon became the person coworkers came to for outfit advice before presentations, meetings, work trips, and events.
-          </p>
-          <p>
-            Those conversations sparked her desire to become a style consultant. Today, she helps busy professionals, business owners, moms, and women tired of staring at full closets build wardrobes that make their mornings easier.
-          </p>
+          <p>{content.storyParagraphOne}</p>
+          <p>{content.storyParagraphTwo}</p>
+          <p>{content.storyParagraphThree}</p>
         </div>
       </section>
 
       <section className="bg-[#f7e8df] px-4 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-28">
         <div className="mb-10 max-w-3xl">
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">Frequently Asked Questions</p>
+          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">{content.faqEyebrow}</p>
           <h2 className="serif text-4xl font-bold leading-none sm:text-5xl lg:text-6xl">
-            What working with Reena looks like
+            {removeTrailingHeadingPeriod(content.faqTitle)}
           </h2>
         </div>
         <div className="grid gap-4 lg:grid-cols-2">

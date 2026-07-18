@@ -6,7 +6,6 @@ export const seedProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 1,
     isFeatured: true
   },
   {
@@ -16,7 +15,6 @@ export const seedProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 2,
     isFeatured: true
   },
   {
@@ -26,7 +24,6 @@ export const seedProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 3,
     isFeatured: true
   },
   {
@@ -36,7 +33,6 @@ export const seedProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 4,
     isFeatured: true
   },
   {
@@ -46,7 +42,6 @@ export const seedProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 5,
     isFeatured: false
   },
   {
@@ -56,7 +51,6 @@ export const seedProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 6,
     isFeatured: false
   },
   {
@@ -66,7 +60,6 @@ export const seedProducts = [
     category: "Services",
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=82",
     pricingNote: "Please inquire directly for pricing.",
-    sortOrder: 7,
     isFeatured: false
   }
 ];
@@ -82,11 +75,11 @@ export const seedPageSlides = [
     sortOrder: 1
   },
   {
-    page: "Shop",
+    page: "Services",
     title: "Styling services for closets, photoshoots, travel, and everyday life",
     text: "Explore style consultations, closet edits, personal shopping, lookbooks, photoshoot styling, and event outfit planning.",
-    href: "/shop",
-    buttonLabel: "Shop",
+    href: "/services",
+    buttonLabel: "Services",
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=82",
     sortOrder: 2
   },

@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { getImageAssets } from "@/app/lib/assets";
 import { getProducts } from "@/app/lib/catalog";
 import { getCurrentSession, isAdmin } from "@/app/lib/auth";
+import { getAllPageContent } from "@/app/lib/page-content";
+import PageContentManager from "./page-content-manager";
 import AdminProductManager from "./product-manager";
 
 export const dynamic = "force-dynamic";
@@ -19,15 +21,16 @@ export default async function AdminPage() {
 
   const products = await getProducts();
   const assets = await getImageAssets();
+  const pageContent = await getAllPageContent();
 
   return (
     <main className="bg-[#fff7f1] px-4 py-16 text-[#5b1725] sm:px-8 sm:py-20 lg:px-14 lg:py-28">
       <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#9f5f6f]">CMS</p>
-          <h1 className="serif text-4xl font-bold leading-none sm:text-6xl">Shop content manager</h1>
+          <h1 className="serif text-4xl font-bold leading-none sm:text-6xl">Services content manager</h1>
           <p className="mt-5 max-w-2xl leading-7 text-[#6f5d55]">
-            Signed in as {session.email}. Product changes are written to MongoDB and shown on the public Shop page.
+            Signed in as {session.email}. Service changes are written to MongoDB and shown on the public Services page.
           </p>
         </div>
         <form action="/api/auth/logout" method="post">
@@ -36,7 +39,10 @@ export default async function AdminPage() {
           </button>
         </form>
       </div>
-      <AdminProductManager initialAssets={assets} initialProducts={products} />
+      <div className="grid gap-8">
+        <PageContentManager initialAssets={assets} initialPages={pageContent} />
+        <AdminProductManager initialAssets={assets} initialProducts={products} />
+      </div>
     </main>
   );
 }

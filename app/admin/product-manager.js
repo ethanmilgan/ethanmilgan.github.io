@@ -9,11 +9,10 @@ const emptyProduct = {
   category: "",
   image: "",
   pricingNote: "Please inquire directly for pricing.",
-  sortOrder: 0,
   isFeatured: false
 };
 
-const assetSections = ["general", "slider", "featured", "shop", "about", "contact", "product"];
+const assetSections = ["general", "slider", "featured", "services", "about", "contact", "product"];
 const uploadMaxBytes = 4 * 1024 * 1024;
 const uploadMaxDimension = 1800;
 const compressibleImageTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -278,10 +277,6 @@ export default function AdminProductManager({ initialAssets, initialProducts }) 
               <label className="grid gap-2 text-sm font-black">
                 Description
                 <textarea className="min-h-32 rounded-lg border border-[#d8c1b4] bg-[#fff7f1] px-4 py-3 font-normal" onChange={(event) => updateField("description", event.target.value)} value={form.description} />
-              </label>
-              <label className="grid gap-2 text-sm font-black">
-                Sort order
-                <input className="rounded-lg border border-[#d8c1b4] bg-[#fff7f1] px-4 py-3 font-normal" onChange={(event) => updateField("sortOrder", Number(event.target.value))} type="number" value={form.sortOrder} />
               </label>
               <label className="flex items-center justify-between gap-4 rounded-lg bg-[#f7e8df] p-4 text-sm font-black">
                 Featured
